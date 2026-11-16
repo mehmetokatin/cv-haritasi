@@ -699,7 +699,7 @@ document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeS
    Tekerlek, trackpad, parmak kaydirma ve klavye: her hareket yalnizca bir sonraki/onceki durağa gider ve orada kilitlenir.
    Trackpad'in atalet (kayma) olaylari yutulur; yeni hareket ancak el durduktan sonra kabul edilir.
    Kaydirma cubugu surüklenirse birakildigi yerde en yakin durağa oturur. */
-var GLIDE_MS = 1300, QUIET_MS = 220, WHEEL_MIN = 24, SWIPE_MIN = 40;
+var GLIDE_MS = 2200, QUIET_MS = 220, WHEEL_MIN = 24, SWIPE_MIN = 40;
 var anim = null, lockUntilQuiet = false, lastWheel = 0, acc = 0, idleT = 0, lastY = window.scrollY || 0, dir = 1;
 function stopY(s){ return Math.round(s.y0 + (s.y1 - s.y0) * 0.4); }
 function curIndex(y){
