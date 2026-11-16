@@ -3,81 +3,464 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CV Haritası — Deneyimini bir şehre dönüştür</title>
-<meta name="description" content="CV Haritası: deneyimlerin binalara, binaların bir şehre dönüştüğü görsel CV. Yakında herkese açık.">
+<title>CV Haritası — CV'nin arkasındaki kanıt</title>
+<meta name="description" content="PDF CV'n kalır. İçindeki tek link, yaptığın işleri bina bina gösterir: projeler, sertifikalar, gönüllülük, dil, referanslar. Her alana uygun yapı: şirket, atölye, ofis, laboratuvar.">
 <meta name="theme-color" content="#05070b">
-<meta property="og:title" content="CV Haritası">
-<meta property="og:description" content="Deneyimini bir şehre dönüştür. İlk şehir: Mehmet Okatın.">
+<meta property="og:title" content="CV Haritası — CV'nin arkasındaki kanıt">
+<meta property="og:description" content="PDF CV'n kalır. İçindeki link, yaptıklarını bina bina gösterir.">
 <meta property="og:image" content="mehmet-okatin/tur/t_0001.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#05070b;
-    --line:rgba(255,255,255,.72);
-    --warm:#f2c46b;
-    --mute:rgba(255,255,255,.6);
+    --ink:#05070b; --ink2:#0b0e14;
+    --line:rgba(255,255,255,.72); --hair:rgba(255,255,255,.12);
+    --warm:#f2c46b; --mute:rgba(255,255,255,.62); --dim:rgba(255,255,255,.42);
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    background:var(--ink);color:#fff;
-    font-family:"Jost",system-ui,sans-serif;
-    -webkit-font-smoothing:antialiased;
-    overflow:hidden;
-  }
-  .sahne{
-    position:fixed;inset:0;
-    background:url("mehmet-okatin/tur/t_0001.webp") center 40%/cover no-repeat;
-    transform:scale(1.08);
-    animation:yaklas 14s ease-out forwards;
-  }
-  .sahne::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(5,7,11,.55) 0%,rgba(5,7,11,.05) 35%,rgba(5,7,11,.15) 60%,rgba(5,7,11,.92) 100%);
-  }
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:#fff;font-family:"Jost",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit}
+  .wrap{width:min(1120px,100% - 2*clamp(20px,5vw,56px));margin:0 auto}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--warm)}
+  h2{font-weight:500;font-size:clamp(28px,4.4vw,46px);line-height:1.08;letter-spacing:-.01em;margin-top:14px;max-width:780px}
+  .lead{margin-top:16px;font-size:clamp(16px,1.9vw,19px);line-height:1.55;color:var(--mute);max-width:640px}
+  section{padding:clamp(72px,11vw,128px) 0;border-top:1px solid var(--hair)}
+
+  .bar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;
+    padding:16px clamp(20px,5vw,56px);font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);
+    transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+  .bar.dolu{background:rgba(5,7,11,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:var(--hair)}
+  .bar .marka{color:#fff;text-decoration:none}
+  .bar nav{display:flex;gap:22px}
+  .bar nav a{text-decoration:none}
+  .bar nav a:hover{color:#fff}
+  @media (max-width:760px){.bar nav a:not(.ornek){display:none}}
+
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+  .sahne{position:absolute;inset:0;background:url("mehmet-okatin/tur/t_0001.webp") center 40%/cover no-repeat;transform:scale(1.08);animation:yaklas 14s ease-out forwards}
+  .sahne::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,11,.6) 0%,rgba(5,7,11,.05) 35%,rgba(5,7,11,.2) 58%,rgba(5,7,11,.96) 100%)}
   @keyframes yaklas{to{transform:scale(1)}}
-  main{
-    position:relative;z-index:1;height:100%;
-    display:flex;flex-direction:column;justify-content:space-between;
-    padding:clamp(24px,5vw,56px);
-  }
-  .ust{display:flex;justify-content:space-between;align-items:center;
-    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
-  .marka{color:#fff}
-  .alt{max-width:640px;opacity:0;transform:translateY(16px);animation:gel 1.2s .6s ease-out forwards}
+  .hero .wrap{position:relative;padding-bottom:clamp(40px,8vh,88px)}
+  .hero .icerik{max-width:700px;opacity:0;transform:translateY(16px);animation:gel 1.2s .5s ease-out forwards}
   @keyframes gel{to{opacity:1;transform:none}}
-  .etiket{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.2em;
-    text-transform:uppercase;color:var(--warm);border:1px solid rgba(242,196,107,.5);padding:6px 10px;margin-bottom:18px}
-  h1{font-weight:500;font-size:clamp(34px,6vw,64px);line-height:1.05;letter-spacing:-.01em}
-  p{margin-top:14px;font-size:clamp(16px,2vw,19px);line-height:1.5;color:var(--mute)}
-  .dugme{
-    display:inline-flex;align-items:center;gap:12px;margin-top:28px;
-    padding:14px 22px;border:1px solid var(--line);color:#fff;text-decoration:none;
-    font-size:16px;letter-spacing:.02em;transition:background .25s,color .25s;
-  }
+  .etiket{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--warm);border:1px solid rgba(242,196,107,.5);padding:6px 10px;margin-bottom:18px}
+  h1{font-weight:500;font-size:clamp(36px,6.4vw,70px);line-height:1.03;letter-spacing:-.015em}
+  .hero p{margin-top:16px;font-size:clamp(16px,2vw,20px);line-height:1.5;color:var(--mute);max-width:600px}
+  .dugmeler{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .dugme{display:inline-flex;align-items:center;gap:12px;padding:14px 22px;border:1px solid var(--line);color:#fff;text-decoration:none;font-size:16px;transition:background .25s,color .25s}
   .dugme:hover,.dugme:focus-visible{background:#fff;color:var(--ink);outline:none}
-  .dugme span{transition:transform .25s}
-  .dugme:hover span{transform:translateX(4px)}
-  footer{margin-top:28px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;color:rgba(255,255,255,.4)}
-  @media (prefers-reduced-motion:reduce){.sahne,.alt{animation:none;transform:none;opacity:1}}
+  .dugme.sade{border-color:var(--hair);color:var(--mute)}
+  .dugme.sade:hover{background:transparent;color:#fff;border-color:var(--line)}
+  .dugme span{transition:transform .25s}.dugme:hover span{transform:translateX(4px)}
+
+  .katman{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:48px}
+  .katman > div{background:var(--ink);padding:28px 26px 30px}
+  .katman .no{font-family:var(--mono);font-size:12px;color:var(--dim)}
+  .katman h3{font-weight:500;font-size:22px;margin-top:22px}
+  .katman .kim{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--warm);margin-top:8px}
+  .katman p{color:var(--mute);line-height:1.55;margin-top:12px;font-size:16px}
+  .katman .sure{margin-top:18px;font-family:var(--mono);font-size:12px;color:var(--dim)}
+  @media (max-width:820px){.katman{grid-template-columns:1fr}}
+
+  .sekmeler{display:flex;gap:8px;margin-top:40px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+  .sekmeler::-webkit-scrollbar{display:none}
+  .sekme{flex:0 0 auto;font:inherit;font-size:15px;background:transparent;color:var(--mute);border:1px solid var(--hair);padding:10px 16px;cursor:pointer;transition:all .2s}
+  .sekme:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+  .sekme[aria-selected="true"]{background:#fff;color:var(--ink);border-color:#fff}
+  .persona{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,4vw,56px);margin-top:20px;border:1px solid var(--hair);padding:clamp(24px,4vw,44px);background:var(--ink2)}
+  .persona[hidden]{display:none}
+  .persona .yapi{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--warm)}
+  .persona h3{font-weight:500;font-size:clamp(22px,2.8vw,30px);line-height:1.2;margin-top:12px}
+  .persona .derdi{color:var(--mute);line-height:1.6;margin-top:14px;font-size:17px}
+  .persona ul{list-style:none;display:grid;gap:14px}
+  .persona li{display:grid;grid-template-columns:22px 1fr;gap:10px;line-height:1.5;color:rgba(255,255,255,.86);font-size:16px}
+  .persona li::before{content:"";width:9px;height:9px;margin-top:8px;border:1px solid var(--warm)}
+  .persona .neden{margin-top:22px;padding-top:18px;border-top:1px solid var(--hair);color:#fff;font-size:17px;line-height:1.5}
+  .persona .neden b{font-weight:500;color:var(--warm)}
+  @media (max-width:820px){.persona{grid-template-columns:1fr}}
+
+  .ikili{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.4vw,28px);margin-top:48px}
+  .kutu{border:1px solid var(--hair);padding:26px 26px 28px;background:var(--ink2)}
+  .kutu h3{font-weight:500;font-size:20px}
+  .kutu p{color:var(--mute);line-height:1.55;margin-top:10px;font-size:16px}
+  .yk{display:inline-block;margin-left:8px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border:1px solid var(--hair);padding:3px 6px;vertical-align:middle}
+  @media (max-width:820px){.ikili{grid-template-columns:1fr}}
+
+  .rozetler{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,28px);margin-top:48px}
+  .rozet{border:1px solid var(--hair);padding:26px}
+  .rozet .r{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px}
+  .r.dog{color:#9fe0b0;border:1px solid rgba(159,224,176,.55)}
+  .r.ref{color:var(--warm);border:1px solid rgba(242,196,107,.55)}
+  .r.bey{color:var(--mute);border:1px solid var(--hair)}
+  .rozet h3{font-weight:500;font-size:20px;margin-top:18px}
+  .rozet p{color:var(--mute);line-height:1.55;margin-top:10px;font-size:16px}
+  @media (max-width:820px){.rozetler{grid-template-columns:1fr}}
+
+  .adimlar{counter-reset:a;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,28px);margin-top:48px}
+  .adim{border-top:1px solid var(--line);padding-top:20px}
+  .adim::before{counter-increment:a;content:"0" counter(a);font-family:var(--mono);font-size:12px;color:var(--dim)}
+  .adim h3{font-weight:500;font-size:21px;margin-top:14px}
+  .adim p{color:var(--mute);line-height:1.55;margin-top:10px;font-size:16px}
+  @media (max-width:820px){.adimlar{grid-template-columns:1fr}}
+
+  .ornekler{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.4vw,28px);margin-top:48px}
+  .kart{position:relative;display:block;text-decoration:none;border:1px solid var(--hair);overflow:hidden;background:var(--ink2)}
+  .kart .resim{overflow:hidden}
+  .kart img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .8s ease,opacity .4s;opacity:.88}
+  .kart:hover img{transform:scale(1.03);opacity:1}
+  .kart .yazi{padding:20px 22px 24px}
+  .kart .tip{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--warm)}
+  .kart h3{font-weight:500;font-size:22px;margin-top:8px}
+  .kart p{color:var(--mute);margin-top:8px;line-height:1.5;font-size:16px}
+  .kart .git{margin-top:14px;font-size:15px;color:#fff}
+  @media (max-width:820px){.ornekler{grid-template-columns:1fr}}
+
+  .sss{margin-top:40px;border-top:1px solid var(--hair)}
+  details{border-bottom:1px solid var(--hair)}
+  summary{list-style:none;cursor:pointer;padding:22px 40px 22px 0;font-size:clamp(17px,2vw,20px);position:relative}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";position:absolute;right:4px;top:18px;font-family:var(--mono);font-size:22px;color:var(--mute);transition:transform .25s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--mute);line-height:1.6;padding:0 0 24px;max-width:720px;font-size:16px}
+
+  footer{padding:36px 0 48px;border-top:1px solid var(--hair);font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--dim);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  .gor{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s ease}
+  .gor.on{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.sahne,.hero .icerik{animation:none;transform:none;opacity:1}.gor{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
+
+<header class="bar" id="bar">
+  <a class="marka" href="#">CV Haritası</a>
+  <nav>
+    <a href="#neden">Neden</a>
+    <a href="#ise-alan">İşe alan için</a>
+    <a href="#nasil">Nasıl</a>
+    <a href="#sss">SSS</a>
+    <a class="ornek" href="mehmet-okatin/">Örnek şehir</a>
+  </nav>
+</header>
+
+<div class="hero">
   <div class="sahne" aria-hidden="true"></div>
-  <main>
-    <div class="ust">
-      <span class="marka">CV Haritası</span>
-      <span>Yakında</span>
+  <div class="wrap">
+    <div class="icerik">
+      <span class="etiket">Kapalı deneme · İlk şehir açık</span>
+      <h1>CV'n bir sayfa.<br>Yaptıkların bir şehir.</h1>
+      <p>PDF CV'n aynen kalır. İçine koyduğun tek link, yaptığın işleri bina bina gösterir: projeler, sertifikalar, gönüllülük, dil, referanslar. Her biri kanıtıyla.</p>
+      <div class="dugmeler">
+        <a class="dugme" href="mehmet-okatin/">Örnek şehri gez <span>→</span></a>
+        <a class="dugme sade" href="#neden">Neden kullanayım?</a>
+      </div>
     </div>
-    <div class="alt">
-      <span class="etiket">İlk şehir açıldı</span>
-      <h1>Deneyimin bir şehre dönüşsün.</h1>
-      <p>Her deneyim bir bina, her bina bir kanıt. CV Haritası yakında herkese açılıyor. İlk şehri şimdi gez.</p>
-      <a class="dugme" href="mehmet-okatin/">Mehmet Okatın'ın şehrini gez <span>→</span></a>
-      <footer>© 2026 CV Haritası · Tasarım ve kurgu: Mehmet Okatın · Claude ile geliştirildi</footer>
+  </div>
+</div>
+
+<section id="katman">
+  <div class="wrap gor">
+    <span class="eyebrow">Önce PDF, sonra kanıt</span>
+    <h2>Her okuyucu ihtiyacı kadarını görür.</h2>
+    <p class="lead">İşe alım uzmanı CV'ye birkaç saniye bakar ve PDF ister. Seni asıl değerlendirecek kişi ise bağlı olacağın departmanın yöneticisidir. CV Haritası ikisine ayrı kapı açar.</p>
+    <div class="katman">
+      <div>
+        <span class="no">01</span>
+        <h3>PDF CV</h3>
+        <div class="kim">İşe alım uzmanı</div>
+        <p>Klasik, tek sayfa, indirilebilir. Hiçbir şey değişmez; sadece altında bir link vardır.</p>
+        <div class="sure">~6 saniye</div>
+      </div>
+      <div>
+        <span class="no">02</span>
+        <h3>Bina ve oda</h3>
+        <div class="kim">Departman yöneticisi</div>
+        <p>İlana uyan işlerin, adım adım: tasarımın eskizi, yazılımın kodu, projenin planı. Tek bir odanın linkini de verebilirsin.</p>
+        <div class="sure">~2 dakika</div>
+      </div>
+      <div>
+        <span class="no">03</span>
+        <h3>Şehrin tamamı</h3>
+        <div class="kim">Merak eden herkes</div>
+        <p>Bütün deneyimlerin bir arada. Binanın yüksekliği emeği, ışığı güncelliği gösterir.</p>
+        <div class="sure">istediği kadar</div>
+      </div>
     </div>
-  </main>
+  </div>
+</section>
+
+<section id="neden">
+  <div class="wrap gor">
+    <span class="eyebrow">Neden kullanırsın?</span>
+    <h2>Her alan kendi yapısını kurar.</h2>
+    <p class="lead">Bir tasarımcıyla bir yazılımcının kanıtı aynı değildir. Alanını seç; şehrin ona göre şekillenir.</p>
+
+    <div class="sekmeler" role="tablist" aria-label="Alanlar">
+      <button class="sekme" role="tab" aria-selected="true" aria-controls="p-tas" id="t-tas">Tasarımcı</button>
+      <button class="sekme" role="tab" aria-selected="false" aria-controls="p-yaz" id="t-yaz">Yazılımcı</button>
+      <button class="sekme" role="tab" aria-selected="false" aria-controls="p-yon" id="t-yon">İşletme · Yönetim</button>
+      <button class="sekme" role="tab" aria-selected="false" aria-controls="p-mim" id="t-mim">Mimar</button>
+      <button class="sekme" role="tab" aria-selected="false" aria-controls="p-ilk" id="t-ilk">"Deneyimim yok"</button>
+    </div>
+
+    <div class="persona" role="tabpanel" id="p-tas" aria-labelledby="t-tas">
+      <div>
+        <div class="yapi">Yapı: Atölye</div>
+        <h3>"İşlerimi anlatmak yerine göstermek istiyorum."</h3>
+        <p class="derdi">PDF'e görsel sığmaz, portfolyo sitesi kurmak ise ayrı bir iş. İşleri bir yere yüklersin ama süreci kimse görmez.</p>
+      </div>
+      <div>
+        <ul>
+          <li>Her proje atölyede bir oda: eskiz → taslak → son hâl</li>
+          <li>Müşteri ya da hoca onayıyla "Doğrulanmış" etiketi</li>
+          <li>Sosyal medya ilanına yalnızca ilgili işlerin linki</li>
+        </ul>
+        <p class="neden"><b>Neden:</b> Kod yazmadan, kendi adresinde duran ve sürecini de anlatan bir portfolyo.</p>
+      </div>
+    </div>
+
+    <div class="persona" role="tabpanel" id="p-yaz" aria-labelledby="t-yaz" hidden>
+      <div>
+        <div class="yapi">Yapı: Laboratuvar</div>
+        <h3>"Kod depom var ama kimse açıp okumuyor."</h3>
+        <p class="derdi">Depo listesi ne yaptığını anlatmaz. Yönetici, projenin hangi sorunu çözdüğünü ve senin payını görmek ister.</p>
+      </div>
+      <div>
+        <ul>
+          <li>Her proje bir kat: sorun, çözüm, ekran görüntüsü, canlı link</li>
+          <li>Depo ve yayındaki ürün kanıt olarak bağlanır</li>
+          <li>Kullandığın diller ve araçlar projenin yanında görünür</li>
+        </ul>
+        <p class="neden"><b>Neden:</b> Kodun okunmasını beklemeden, projenin değeri ilk bakışta anlaşılır.</p>
+      </div>
+    </div>
+
+    <div class="persona" role="tabpanel" id="p-yon" aria-labelledby="t-yon" hidden>
+      <div>
+        <div class="yapi">Yapı: Şirket</div>
+        <h3>"Teoriyi biliyorum ama bunu nasıl gösteririm?"</h3>
+        <p class="derdi">İşletme ve yönetim öğrencisinin elinde ders notu var, kanıt yok. "Proje yönetimi biliyorum" herkesin CV'sinde yazıyor.</p>
+      </div>
+      <div>
+        <ul>
+          <li>Derste öğrendiğini hayali bir şirketin katlarında senaryoyla çözersin</li>
+          <li>Her senaryo adım adım: sorun, rol, karar, sonuç</li>
+          <li>Hoca onayıyla senaryo "Doğrulanmış" olur</li>
+        </ul>
+        <p class="neden"><b>Neden:</b> Görüşmede "nasıl çözerdin?" sorusunun cevabı zaten hazır.</p>
+      </div>
+    </div>
+
+    <div class="persona" role="tabpanel" id="p-mim" aria-labelledby="t-mim" hidden>
+      <div>
+        <div class="yapi">Yapı: Ofis</div>
+        <h3>"Paftalarım 40 MB, e-postaya sığmıyor."</h3>
+        <p class="derdi">Mimarlık portfolyosu ağır dosyalardan oluşur. İşveren önce birkaç görsele bakmak ister, gerisine sonra.</p>
+      </div>
+      <div>
+        <ul>
+          <li>Her proje bir oda: çizim, render, maket fotoğrafı</li>
+          <li>Önce öne çıkan görsel, istenirse tam dosya</li>
+          <li>Stüdyo hocası ya da jüri onayıyla doğrulama</li>
+        </ul>
+        <p class="neden"><b>Neden:</b> Ağır dosya yerine hafif bir link; işveren istediği kadar derine iner.</p>
+      </div>
+    </div>
+
+    <div class="persona" role="tabpanel" id="p-ilk" aria-labelledby="t-ilk" hidden>
+      <div>
+        <div class="yapi">Yapı: Çekirdek binalar</div>
+        <h3>"CV'm boş görünüyor."</h3>
+        <p class="derdi">Staj ararken çoğu öğrencinin iş deneyimi yoktur. Oysa stajyer alımında eğitimler, sertifikalar, gönüllülük, dil ve bildiğin programlar belirleyicidir.</p>
+      </div>
+      <div>
+        <ul>
+          <li>Akademi, sertifikalar, Topluluk Meydanı (gönüllülük), Dil Okulu</li>
+          <li>Kulüp etkinliği, yarışma, ödev projesi: hepsi bir kat</li>
+          <li>Boş kategori şehirde görünmez, eksik gibi durmaz</li>
+        </ul>
+        <p class="neden"><b>Neden:</b> Düz CV'de boşluk gibi görünen şey, şehirde ilk binaların olarak görünür.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ise-alan">
+  <div class="wrap gor">
+    <span class="eyebrow">İşe alan için neden?</span>
+    <h2>Zaman almaz, güven verir.</h2>
+    <p class="lead">Bakacak kişinin vakti azdır. Her şey ona göre sıralanır.</p>
+    <div class="ikili">
+      <div class="kutu">
+        <h3>İlk ekranda özet</h3>
+        <p>Ad, hedef pozisyon, üç rakam. Şehri gezmeden karar verilebilir.</p>
+      </div>
+      <div class="kutu">
+        <h3>Tek tıkla PDF</h3>
+        <p>Her sayfada "Klasik CV" düğmesi. Sisteme yüklenecek dosya her zaman hazır.</p>
+      </div>
+      <div class="kutu">
+        <h3>İlana göre seçki <span class="yk">Yakında</span></h3>
+        <p>Aday, başvurduğu ilana uyan odaları seçip tek link gönderir. Yönetici yalnızca ilgili işleri görür.</p>
+      </div>
+      <div class="kutu">
+        <h3>Kanıt ve referans bir arada</h3>
+        <p>Beyan ile doğrulanmış bilgi ayrı işaretlenir. Referanslar ilgili deneyimin yanında durur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kanit">
+  <div class="wrap gor">
+    <span class="eyebrow">Güven</span>
+    <h2>Her bina neye dayandığını söyler.</h2>
+    <p class="lead">Güzel görünen profil yetmez. Her deneyim üç etiketten birini taşır; okuyan neye güvenebileceğini bilir.</p>
+    <div class="rozetler">
+      <div class="rozet">
+        <span class="r dog">Doğrulanmış</span>
+        <h3>Kanıt linki var</h3>
+        <p>Sertifika adresi, yayındaki ürün, kod deposu, hoca onayı. Tıklayan kendisi kontrol eder.</p>
+      </div>
+      <div class="rozet">
+        <span class="r ref">Referanslı</span>
+        <h3>Biri kefil oluyor</h3>
+        <p>O deneyimde birlikte çalıştığın yönetici ya da hoca. Adı ve unvanı görünür; iletişim bilgisi yalnızca istenirse paylaşılır.</p>
+      </div>
+      <div class="rozet">
+        <span class="r bey">Beyan</span>
+        <h3>Senin sözün</h3>
+        <p>Kanıtı henüz eklenmemiş deneyim. Saklanmaz, dürüstçe işaretlenir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nasil">
+  <div class="wrap gor">
+    <span class="eyebrow">Nasıl çalışır</span>
+    <h2>Üç adımda şehrin hazır.</h2>
+    <div class="adimlar">
+      <div class="adim">
+        <h3>Deneyimlerini ekle</h3>
+        <p>Eğitim, iş, proje, sertifika, gönüllülük, dil. Her birine varsa kanıt linki ve referans.</p>
+      </div>
+      <div class="adim">
+        <h3>Binaların yükselsin</h3>
+        <p>Her kategori bir bina, her deneyim bir kat. Alanına göre şirket, atölye, ofis ya da laboratuvar eklenir.</p>
+      </div>
+      <div class="adim">
+        <h3>Linkini PDF'ine koy</h3>
+        <p>cvharitasi.com/adın. İster şehrin tamamını, ister tek bir odayı paylaş.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ornek">
+  <div class="wrap gor">
+    <span class="eyebrow">İlk şehir</span>
+    <h2>Kurucunun şehri: Mehmet Okatın.</h2>
+    <p class="lead">Ürünün ilk kullanıcısı. Yönetim Bilişim Sistemleri öğrencisi; CV'si bir kulede, ders uygulamaları bir şirkette.</p>
+    <div class="ornekler">
+      <a class="kart" href="mehmet-okatin/">
+        <div class="resim"><img src="mehmet-okatin/kareler/kat_resepsiyon.webp" alt="CV binasının resepsiyon katı" loading="lazy"></div>
+        <div class="yazi">
+          <div class="tip">CV binası</div>
+          <h3>Deneyimler, kat kat</h3>
+          <p>Yazılım projeleri, kendi işletmesi, sertifikalar, üniversite. Her katta kanıt linki.</p>
+          <div class="git">Gez →</div>
+        </div>
+      </a>
+      <a class="kart" href="mehmet-okatin/acm/">
+        <div class="resim"><img src="mehmet-okatin/acm/kareler/kat_toplanti.webp" alt="Şirket yapısının toplantı katı" loading="lazy"></div>
+        <div class="yazi">
+          <div class="tip">Uygulama yapısı · Şirket</div>
+          <h3>Ders, senaryolarla</h3>
+          <p>Yönetim dersinde öğrendiklerini hayali bir şirketin beş katında adım adım çözüyor.</p>
+          <div class="git">Gez →</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="sss">
+  <div class="wrap gor">
+    <span class="eyebrow">Sık sorulanlar</span>
+    <h2>Aklına takılanlar.</h2>
+    <div class="sss">
+      <details>
+        <summary>PDF CV yetmez mi?</summary>
+        <p>İşe alım uzmanı için yeter; bu yüzden PDF'in aynen kalıyor. CV Haritası onun yerine geçmez, arkasında durur: PDF'te "yaptım" dediğin şeyin kanıtını, seni değerlendirecek yöneticiye gösterir.</p>
+      </details>
+      <details>
+        <summary>İşe alan biri bu linke gerçekten tıklar mı?</summary>
+        <p>Özellikle tasarım, sosyal medya ve yazılım alımlarında adayın işlerini görmek isterler. Linke süreçteki herkes bakabilir, ama asıl değerlendiren bağlı olacağın departmanın yöneticisidir. Bu yüzden ilk ekran kısa, ayrıntı bir tık ötede.</p>
+      </details>
+      <details>
+        <summary>Benim alanım listede yok.</summary>
+        <p>Çekirdek binalar (eğitim, iş, sertifika, gönüllülük, dil) herkeste aynıdır. Alana özel yapılar çoğalacak: hukuk için büro, sağlık için klinik, eğitim için sınıf, mühendislik için fabrika gibi.</p>
+      </details>
+      <details>
+        <summary>Referanslarımın bilgileri herkese mi açık?</summary>
+        <p>Hayır. Şehirde referansın adı ve unvanı görünür; iletişim bilgisi yalnızca sen izin verirsen ve istenirse paylaşılır. Referans eklemeden önce o kişinin onayını almalısın.</p>
+      </details>
+      <details>
+        <summary>Telefon numaram görünecek mi?</summary>
+        <p>Hayır. Şehirde telefon numarası yer almaz. İletişim yalnızca senin seçtiğin yoldan kurulur.</p>
+      </details>
+      <details>
+        <summary>Ne zaman ve nasıl kullanabilirim?</summary>
+        <p>Şu an kapalı deneme aşamasındayız ve ilk şehir yayında. Kurulum adımları ve koşullar açılışta duyurulacak.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap gor">
+    <span class="eyebrow">Yakında herkese açık</span>
+    <h2>Şehrin, CV'nin arkasında dursun.</h2>
+    <div class="dugmeler">
+      <a class="dugme" href="mehmet-okatin/">Örnek şehri gez <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>© 2026 CV Haritası · Tasarım ve kurgu: Mehmet Okatın</span>
+  <span>Claude ile geliştirildi</span>
+</footer>
+
+<script>
+  var bar=document.getElementById('bar');
+  function cubuk(){bar.classList.toggle('dolu',window.scrollY>40)}
+  window.addEventListener('scroll',cubuk,{passive:true});cubuk();
+
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})
+  },{threshold:.12}):null;
+  document.querySelectorAll('.gor').forEach(function(el){io?io.observe(el):el.classList.add('on')});
+
+  var tabs=[].slice.call(document.querySelectorAll('.sekme'));
+  function sec(t){
+    tabs.forEach(function(x){
+      var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden=!on;
+    });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){sec(t)});
+    t.addEventListener('keydown',function(e){
+      var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+      if(d){var n=tabs[(i+d+tabs.length)%tabs.length];sec(n);n.focus();e.preventDefault()}
+    });
+  });
+  sec(tabs[0]);
+</script>
 </body>
 </html>
