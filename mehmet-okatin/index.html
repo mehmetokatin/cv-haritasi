@@ -694,6 +694,57 @@ document.addEventListener("click", function(e){
 });
 document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeSheet(); });
 
+/* ---------- durak miknatisi ----------
+   Kaydirma durunca yolun ortasinda kalinmaz: gidilen yondeki durağa yumusakca oturur.
+   Klavye: asagi ok / PageDown / bosluk sonraki durak, yukari ok / PageUp onceki durak. */
+var lastY = window.scrollY || 0, dir = 1, idleT = 0, snapTo = -1, snapT = 0;
+function stopY(s){ return s.y0 + (s.y1 - s.y0) * 0.4; }
+function curIndex(y){
+  for (var k = 0; k < SEG.length; k++){
+    var n = SEG[k + 1];
+    if (!n || y < n.y0) return k;
+  }
+  return SEG.length - 1;
+}
+function glide(s){
+  snapTo = stopY(s); clearTimeout(snapT);
+  snapT = setTimeout(function(){ snapTo = -1; }, 1600);
+  window.scrollTo({top:snapTo, behavior:reduce ? "auto" : "smooth"});
+}
+function snap(){
+  if (sheetOpen || snapTo >= 0) return;
+  var y = window.scrollY || 0;
+  for (var k = 0; k < SEG.length - 1; k++){
+    var s = SEG[k], n = SEG[k + 1];
+    if (y >= s.y0 && y <= s.y1) return;                       /* zaten durakta */
+    if (y > s.y1 && y < n.y0){
+      var t = (y - s.y1) / (n.y0 - s.y1);
+      glide(t < .12 ? s : t > .88 ? n : (dir > 0 ? n : s));
+      return;
+    }
+  }
+}
+window.addEventListener("scroll", function(){
+  var y = window.scrollY || 0;
+  if (y !== lastY) dir = y > lastY ? 1 : -1;
+  lastY = y;
+  if (snapTo >= 0 && Math.abs(y - snapTo) < 2){ snapTo = -1; clearTimeout(snapT); }
+  clearTimeout(idleT); idleT = setTimeout(snap, 160);
+}, {passive:true});
+document.addEventListener("keydown", function(e){
+  if (sheetOpen || e.metaKey || e.ctrlKey || e.altKey) return;
+  var tag = (e.target && e.target.tagName) || "";
+  if (tag === "INPUT" || tag === "TEXTAREA") return;
+  var down = e.key === "ArrowDown" || e.key === "PageDown" || (e.key === " " && !e.shiftKey);
+  var up = e.key === "ArrowUp" || e.key === "PageUp" || (e.key === " " && e.shiftKey);
+  if (!down && !up) return;
+  e.preventDefault();
+  var k = curIndex(window.scrollY || 0), s = SEG[k];
+  var y = window.scrollY || 0, inHold = y >= s.y0 && y <= s.y1;
+  var target = down ? Math.min(SEG.length - 1, k + 1) : (inHold ? Math.max(0, k - 1) : k);
+  glide(SEG[target]);
+});
+
 /* ---------- baslangic ---------- */
 function route(){
   var h = (location.hash || "").slice(1);
