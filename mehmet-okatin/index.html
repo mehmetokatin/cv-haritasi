@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mehmet Okatın – CV</title>
-<meta name="description" content="Mehmet Okatın'ın görsel CV'si: Kristal Kule'nin katlarında altı deneyim, her birinin yanında kanıtı. YBS öğrencisi, OptiBean kurucusu; 2027 yazı için ürün veya iş analisti stajı arıyor.">
+<meta name="description" content="Mehmet Okatın – CV. YBS öğrencisi, OptiBean kurucusu; 2027 yazı için ürün veya iş analisti stajı arıyor.">
 <meta name="theme-color" content="#05070b">
+<link rel="alternate" hreflang="en" href="en/">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,7 +61,8 @@ a{color:inherit}
   font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--text);
   background:rgba(5,7,11,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:border-color .2s}
 .cvbtn:hover{border-color:var(--edge)}
-/* asansor gostergesi: kulenin kat numarasi doner */
+.hudr{display:flex;gap:8px;pointer-events:auto}
+/* durak gostergesi: sagdaki cubukla ayni sira numarasi */
 .lift{position:fixed;z-index:3;right:clamp(54px,6vw,96px);bottom:clamp(20px,6vh,64px);height:1em;overflow:hidden;pointer-events:none;
   font-family:var(--display);font-weight:700;font-size:clamp(88px,13vw,190px);line-height:1;letter-spacing:-.02em;
   color:transparent;-webkit-text-stroke:1.5px rgba(220,233,255,.75);font-variant-numeric:tabular-nums;
@@ -191,12 +193,12 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
 <div class="shade" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 <div class="scan" id="scan" aria-hidden="true"></div>
-<div class="lift" id="lift" aria-hidden="true"><div id="liftCol"><span></span><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span><span>09</span></div></div>
+<div class="lift" id="lift" aria-hidden="true"><div id="liftCol"><span></span><span>00</span><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span></div></div>
 <div class="prog" id="bar" aria-hidden="true"></div>
 
 <header class="hud">
   <button class="brand" id="home" aria-label="Başa dön">Mehmet Okatın <span>CV</span></button>
-  <button class="cvbtn" data-cv>Klasik CV</button>
+  <div class="hudr"><a class="cvbtn" href="en/" hreflang="en" lang="en" aria-label="English version">EN</a><button class="cvbtn" data-cv>Klasik CV</button></div>
   <div class="sr" id="count" aria-live="polite"></div>
 </header>
 <nav class="rail" id="rail" aria-label="Duraklar"></nav>
@@ -208,7 +210,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
     <h1>Mehmet Okatın</h1>
     <p>YBS Öğrencisi · OptiBean Kurucusu · Ürün / İş Analisti Adayı</p>
     <div class="who"><b>Aradığım:</b> Ürün veya iş analisti stajı · 2027 yazı</div>
-    <div class="hint"><i></i>Kaydırarak kuleye gir</div>
+    <div class="hint"><i></i>Kaydırın</div>
   </section>
 
   <section class="card" data-seg="ozet" data-name="Özet">
@@ -268,7 +270,6 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
       <li>3 kişilik ekip, üretim ve perakende satış</li>
       <li>Fiyatlandırma, satın alma ve stok</li>
     </ul>
-    <p class="note">Tamamlandı; bu katın ışıkları söndü.</p>
   </section>
 
   <section class="card" data-seg="sertifikalar" data-name="Google sertifikaları">
@@ -301,7 +302,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   <section class="card" data-seg="iletisim" data-name="İletişim">
     <div class="eyebrow"><span class="no">Kapanış</span><span>Müdür odası</span></div>
     <h2>İletişim</h2>
-    <p class="q">Kule dikkat çeker; karar klasik CV'den verilir.</p>
+    <p class="q">Benimle iletişime geçin.</p>
     <div class="acts">
       <a class="open" href="Mehmet_Okatin_CV.pdf" download data-pdf>PDF indir</a>
       <a class="open quiet" href="mailto:mehmetokatinn@gmail.com" data-mail>E-posta gönder</a>
@@ -312,9 +313,8 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card intro" data-seg="kule">
-    <h1>Kulenin <em>tamamı</em>.</h1>
-    <p>Altı kat, altı deneyim. Her birinin yanında kanıtı ya da “beyan” etiketi var.</p>
-    <div class="who"><b>Mehmet Okatın</b> · YBS, Yeditepe Üniversitesi · OptiBean kurucusu</div>
+    <h1>Mehmet Okatın</h1>
+    <p>YBS Öğrencisi · OptiBean Kurucusu · Ürün / İş Analisti Adayı</p>
     <div class="acts"><button class="open" data-go="giris">Başa dön</button><button class="open quiet" data-cv>Klasik CV</button></div>
   </section>
 </main>
@@ -623,7 +623,7 @@ function tick(now){
     if (id && cardEls[id]) cardEls[id].classList.add("on");
     activeSeg = id;
   }
-  var kat = st.seg.kat || 0;
+  var kat = stops.indexOf(st.seg) + 1;               /* buyuk sayi = durak cubugundaki sira */
   if (kat !== lastKat){
     lastKat = kat;
     $("lift").classList.toggle("on", kat > 0);
