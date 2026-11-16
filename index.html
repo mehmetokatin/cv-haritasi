@@ -8,7 +8,8 @@
 <meta name="theme-color" content="#05070b">
 <meta property="og:title" content="CV Haritası — CV'nin arkasındaki kanıt">
 <meta property="og:description" content="PDF CV'n kalır. İçindeki link, yaptıklarını bina bina gösterir.">
-<meta property="og:image" content="mehmet-okatin/tur/t_0001.webp">
+<meta property="og:image" content="https://mehmetokatin.github.io/cv-haritasi/mehmet-okatin/sehir/img/paylasim.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -40,8 +41,8 @@
   @media (max-width:760px){.bar nav a:not(.ornek){display:none}}
 
   .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
-  .sahne{position:absolute;inset:0;background:url("mehmet-okatin/tur/t_0001.webp") center 40%/cover no-repeat;transform:scale(1.08);animation:yaklas 14s ease-out forwards}
-  .sahne::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,11,.6) 0%,rgba(5,7,11,.05) 35%,rgba(5,7,11,.2) 58%,rgba(5,7,11,.96) 100%)}
+  .sahne{position:absolute;inset:0;background:url("mehmet-okatin/sehir/img/sehir_genel.webp") 62% 45%/cover no-repeat;transform:scale(1.08);animation:yaklas 14s ease-out forwards}
+  .sahne::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,7,11,.82) 0%,rgba(5,7,11,.55) 34%,rgba(5,7,11,0) 62%),linear-gradient(180deg,rgba(5,7,11,.6) 0%,rgba(5,7,11,.05) 35%,rgba(5,7,11,.2) 58%,rgba(5,7,11,.96) 100%)}
   @keyframes yaklas{to{transform:scale(1)}}
   .hero .wrap{position:relative;padding-bottom:clamp(40px,8vh,88px)}
   .hero .icerik{max-width:700px;opacity:0;transform:translateY(16px);animation:gel 1.2s .5s ease-out forwards}
@@ -106,7 +107,7 @@
   .adim p{color:var(--mute);line-height:1.55;margin-top:10px;font-size:16px}
   @media (max-width:820px){.adimlar{grid-template-columns:1fr}}
 
-  .ornekler{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.4vw,28px);margin-top:48px}
+  .ornekler{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(16px,2.4vw,28px);margin-top:48px}
   .kart{position:relative;display:block;text-decoration:none;border:1px solid var(--hair);overflow:hidden;background:var(--ink2)}
   .kart .resim{overflow:hidden}
   .kart img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .8s ease,opacity .4s;opacity:.88}
@@ -117,6 +118,7 @@
   .kart p{color:var(--mute);margin-top:8px;line-height:1.5;font-size:16px}
   .kart .git{margin-top:14px;font-size:15px;color:#fff}
   @media (max-width:820px){.ornekler{grid-template-columns:1fr}}
+  @media (max-width:640px){.sahne{background-size:auto 58%;background-position:47% 9%;background-color:#05070b}.sahne::after{background:linear-gradient(180deg,rgba(5,7,11,.35) 0%,rgba(5,7,11,0) 18%,rgba(5,7,11,.55) 44%,rgba(5,7,11,.97) 60%)}}
 
   .sss{margin-top:40px;border-top:1px solid var(--hair)}
   details{border-bottom:1px solid var(--hair)}
@@ -367,11 +369,11 @@
     <p class="lead">Ürünün ilk kullanıcısı. Yönetim Bilişim Sistemleri öğrencisi; CV'si bir kulede, ders uygulamaları bir şirkette.</p>
     <div class="ornekler">
       <a class="kart" href="mehmet-okatin/">
-        <div class="resim"><img src="mehmet-okatin/kareler/kat_resepsiyon.webp" alt="CV binasının resepsiyon katı" loading="lazy"></div>
+        <div class="resim"><img src="mehmet-okatin/v2/kareler/kat_meot.webp" alt="CV kulesinin yazılım projesi katı" loading="lazy"></div>
         <div class="yazi">
           <div class="tip">CV binası</div>
           <h3>Deneyimler, kat kat</h3>
-          <p>Yazılım projeleri, kendi işletmesi, sertifikalar, üniversite. Her katta kanıt linki.</p>
+          <p>Dokuz kat: yazılım projeleri, kendi işletmesi, sertifikalar, üniversite ve sıradaki hedef. Her katta kanıt linki.</p>
           <div class="git">Gez →</div>
         </div>
       </a>
@@ -381,6 +383,15 @@
           <div class="tip">Uygulama yapısı · Şirket</div>
           <h3>Ders, senaryolarla</h3>
           <p>Yönetim dersinde öğrendiklerini hayali bir şirketin beş katında adım adım çözüyor.</p>
+          <div class="git">Gez →</div>
+        </div>
+      </a>
+      <a class="kart" href="mehmet-okatin/sehir/">
+        <div class="resim"><img src="mehmet-okatin/sehir/img/akademi.webp" alt="Şehrin Akademi semti: ders binaları" loading="lazy"></div>
+        <div class="yazi">
+          <div class="tip">Şehir haritası</div>
+          <h3>Dersler, bina bina</h3>
+          <p>Akademi semtinde her ders bir kat; etkinlikler meydanda, kişisel projeler atölyede. Yapıya dokun, içini gör.</p>
           <div class="git">Gez →</div>
         </div>
       </a>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mehmet Okatın – Şehir haritası</title>
+<meta name="description" content="Mehmet Okatın'ın CV şehri: Kristal Kule, ACM şirketi, Akademi semti, Topluluk Meydanı, Atölye ve 2027 arsası. Her yapı gerçek bir deneyimi gösterir.">
+<meta name="theme-color" content="#05070b">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mehmet Okatın – CV şehri">
+<meta property="og:description" content="Deneyimlerim, derslerim ve projelerim bir şehrin binalarında. Yapılara dokunun, içini görün.">
+<meta property="og:image" content="https://mehmetokatin.github.io/cv-haritasi/mehmet-okatin/sehir/img/paylasim.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Yerlesim fikri: sehir resmi sahnenin tamami; yapilar resmin ustunde gorunmez dugmeler. Dokununca yan panel (telefonda alttan cekmece) yapinin icini anlatir. */
+:root{
+  color-scheme:dark;
+  --ink:#05070b; --panel:#0d1016; --edge:#dce9ff; --amber:#ffb469; --text:#eef2f8; --muted:#9aa4b5; --bean:#62d6a2;
+  --rule:rgba(220,233,255,.16);
+  --body:"Jost","Futura","Avenir Next",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ink);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.5}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--edge);outline-offset:3px;border-radius:4px}
+
+.hud{position:fixed;z-index:20;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 22px;
+  background:linear-gradient(var(--ink),rgba(5,7,11,0))}
+.brand{font-weight:600;letter-spacing:.02em;text-decoration:none}
+.brand span{font-family:var(--mono);font-size:12px;color:var(--amber);margin-left:8px;letter-spacing:.12em;text-transform:uppercase}
+.hudr{display:flex;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
+  padding:8px 12px;border:1px solid var(--rule);border-radius:999px;background:rgba(13,16,22,.6);backdrop-filter:blur(6px);transition:border-color .2s,background .2s}
+.btn:hover{border-color:var(--edge)}
+.btn.main{background:var(--amber);color:#1a1006;border-color:var(--amber)}
+
+/* sahne: resim ekrana sigar, kutular resimle birlikte olceklenir */
+.scene{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:64px 0 24px}
+.map{position:relative;width:min(100vw,calc((100vh - 88px) * 16 / 9));aspect-ratio:16/9}
+.map img{display:block;width:100%;height:100%;object-fit:cover;user-select:none}
+.map::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 80px 30px var(--ink)}
+.spot{position:absolute;border-radius:6px;transition:background .2s,box-shadow .2s}
+.spot:hover,.spot:focus-visible,.spot[aria-expanded="true"]{background:rgba(255,180,105,.10);box-shadow:0 0 0 1.5px var(--amber),0 0 24px rgba(255,180,105,.35)}
+.spot:focus-visible{outline:none}
+.lbl{position:absolute;transform:translate(-50%,-100%);pointer-events:none;white-space:nowrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text);padding:3px 8px;border-radius:999px;background:rgba(5,7,11,.72);border:1px solid var(--rule);transition:border-color .2s,color .2s}
+.lbl::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:10px;background:var(--rule)}
+.lbl.hot{border-color:var(--amber);color:var(--amber)}
+.hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em;
+  background:rgba(5,7,11,.6);padding:6px 12px;border-radius:999px;pointer-events:none;transition:opacity .4s;white-space:nowrap}
+
+/* panel */
+.panel{position:fixed;z-index:30;top:0;right:0;bottom:0;width:min(440px,100vw);background:var(--panel);border-left:1px solid var(--rule);
+  transform:translateX(102%);transition:transform .45s cubic-bezier(.6,0,.2,1);overflow-y:auto;overscroll-behavior:contain}
+.panel.on{transform:none}
+.panel figure{margin:0;aspect-ratio:16/9;background:#000;overflow:hidden}
+.panel figure img{width:100%;height:100%;object-fit:cover;display:block}
+.pbody{padding:22px 24px 32px}
+.eyebrow{font-family:var(--mono);font-size:12px;color:var(--amber);letter-spacing:.12em;text-transform:uppercase}
+.panel h2{margin:.2em 0 .1em;font-size:28px;font-weight:600;line-height:1.15}
+.panel .q{color:var(--muted);margin:.4em 0 1em}
+.panel h3{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:1.4em 0 .5em}
+.items{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.items li{display:flex;gap:12px;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.items li small{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.items li .st{font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap}
+.st.ok{color:var(--bean);border-color:rgba(98,214,162,.4)}
+.st.go{color:var(--amber);border-color:rgba(255,180,105,.4)}
+.st.wait{color:var(--muted)}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;background:rgba(5,7,11,.7);display:grid;place-items:center;border:1px solid var(--rule)}
+.scrim{position:fixed;inset:0;z-index:25;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+
+/* yapi listesi: telefonda ana gezinme, masaustunde ozet */
+.list{max-width:1100px;margin:0 auto;padding:24px 22px 64px}
+.list h2{font-size:15px;font-family:var(--mono);font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;list-style:none;margin:0;padding:0}
+.grid button{width:100%;text-align:left;padding:14px 16px;border:1px solid var(--rule);border-radius:12px;background:var(--panel);transition:border-color .2s}
+.grid button:hover{border-color:var(--amber)}
+.grid b{display:block;font-weight:600}
+.grid span{display:block;color:var(--muted);font-size:14px;line-height:1.35;margin-top:2px}
+footer{max-width:1100px;margin:0 auto;padding:0 22px 40px;color:var(--muted);font-size:13px}
+
+@media (max-width:760px){
+  .hud{padding:12px 14px}
+  .brand span{display:none}
+  .scene{min-height:0;padding:64px 0 0;display:block}
+  .map{width:100%}
+  .lbl{font-size:9px;padding:2px 6px}
+  .lbl.minor{display:none}
+  .hint{bottom:auto;top:calc(100% + 8px);background:none}
+  .list{padding-top:44px}
+  .panel{top:auto;left:0;width:100%;max-height:86vh;border-left:0;border-top:1px solid var(--rule);border-radius:16px 16px 0 0;transform:translateY(102%)}
+  .panel.on{transform:none}
+}
+@media (prefers-reduced-motion:reduce){ .panel,.scrim{transition:none} }
+</style>
+</head>
+<body>
+<header class="hud">
+  <a class="brand" href="../">Mehmet Okatın <span>CV şehri</span></a>
+  <div class="hudr"><a class="btn" href="../">Kule CV</a><a class="btn" href="../Mehmet_Okatin_CV.pdf" download>PDF</a></div>
+</header>
+
+<main>
+  <section class="scene" aria-label="Şehir haritası">
+    <div class="map" id="map">
+      <img src="img/sehir_genel.webp" width="1920" height="1080" alt="Gece, suyun üstünde bir şehir: ortada iki keskin kule arasında Kristal Kule, solda Akademi semti, Topluluk Meydanı ve 2027 arsası, sağda Atölye ve ACM şirketinin kulesi.">
+      <div class="hint" id="hint">Bir yapıya dokunun</div>
+    </div>
+  </section>
+
+  <section class="list" aria-labelledby="listTitle">
+    <h2 id="listTitle">Şehirdeki yapılar</h2>
+    <ul class="grid" id="grid"></ul>
+  </section>
+</main>
+<footer>Şehir Blender ile tasarlandı. Her yapı gerçek bir deneyimi, dersi ya da projeyi gösterir; iskeledekiler henüz hedef.</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="pTitle" aria-hidden="true">
+  <figure id="pFig" hidden><img id="pImg" alt=""></figure>
+  <button class="close" id="pClose" aria-label="Kapat"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  <div class="pbody" id="pBody"></div>
+</aside>
+
+<script>
+(function(){
+"use strict";
+/* Kutular: blender/cikti/harita_olculer_v6.json (resmin yuzdesi: sol, ust, sag, alt).
+   Ayni yerde ust uste binen kutularda kucuk olan uste gelir. Telefon numarasi yok. */
+var OK = "Tamamlandı", GO = "Devam ediyor", WAIT = "Sırada";
+var Y = {
+  kristal:{box:[42.1,18.4,57.8,68.6], label:"Kristal Kule", tag:"Ana yapı", title:"Kristal Kule",
+    q:"Görsel CV'm. Dokuz katta deneyimlerim, projelerim ve sertifikalarım; kat kat gezilir.",
+    items:[["MeoT Prep","Ürün sahibi ve geliştirici","ok"],["OptiBean Yönetim Uygulaması","Veritabanı ve raporlar","ok"],["OptiBean","Kurucu · Nisan 2025","ok"],["Balım Dondurma","Operasyon müdürü · 8 yaz sezonu","ok"],["Google sertifikaları","Project Management · AI Essentials","ok"]],
+    links:[["Kuleyi gez","../",1]]},
+  acm_kule:{box:[77.2,29.3,83.4,65.8], label:"ACM şirketi", tag:"Ders projesi", title:"ACM şirketi",
+    q:"Bir ders için kurduğum hayali şirket. Katlarında dersin konularını gerçek iş senaryolarıyla anlattım.",
+    img:"img/iki_kule.webp", items:[], links:[["Şirketi gez","../acm/",1]]},
+  acm_meydan:{box:[70.9,60.4,89.6,69.9], ref:"acm_kule"},
+  akademi_meydan:{box:[27.6,48.4,45.1,53.8], label:"Akademi", tag:"Yeditepe · YBS · 2023–2028", title:"Akademi semti",
+    q:"Bölümümün ders aileleri beş binada. Her ders bir kat: bitenlerin camı yanar, almadıklarım iskelede bekler. Meydandaki şerit sekiz dönemi gösterir; şu an beşincisindeyim.",
+    img:"img/akademi.webp",
+    items:[["Yazılım","5 ders","ok"],["Veri ve Sistem","2 ders · 1 seçmeli kat iskelede","ok"],["Web ve Dijital İş","3 ders","ok"],["Yönetim ve Kurumsal Sistemler","2 ders · 2 kat iskelede","go"],["İşletme ve İktisat","4 ders","ok"],["MIS394 Staj · MIS498 Bitirme","Meydandaki iki taş","wait"]],
+    links:[["ACM şirketini gez","../acm/",0]]},
+  akademi_yazilim:{box:[35.5,38.4,38.7,49.8], minor:1, label:"Yazılım", tag:"Akademi semti", title:"Yazılım", img:"img/akademi.webp",
+    q:"Programlamanın temelinden algoritmalara.",
+    items:[["CIS111","Yazılım Temelleri","ok"],["CIS112","Nesne Yönelimli Veri Yapıları","ok"],["CIS116","Nesne Yönelimli Yazılım","ok"],["CIS114","Algoritmalar","ok"],["CIS113","Programlama Dilleri","ok"]], up:"akademi_meydan"},
+  akademi_veri:{box:[32.6,41.1,35.8,49.9], minor:1, label:"Veri", tag:"Akademi semti", title:"Veri ve Sistem", img:"img/akademi.webp",
+    q:"Sistem analizi ve veritabanı. En üst kat bir seçmeli ders için boş.",
+    items:[["ACM213","Bilgi Analizi ve Sistem Tasarımı","ok"],["ACM212","İleri Veritabanı","ok"],["Seçmeli","Henüz seçilmedi","wait"]], up:"akademi_meydan"},
+  akademi_web:{box:[29.6,41.1,32.9,49.8], minor:1, label:"Web", tag:"Akademi semti", title:"Web ve Dijital İş", img:"img/akademi.webp",
+    q:"Web tasarımından e-işe.",
+    items:[["ACM262","Web Tasarımına Giriş","ok"],["ACM365","İleri Web Tasarımı","ok"],["ACM366","E-İş","ok"]], up:"akademi_meydan"},
+  akademi_yonetim:{box:[41.5,39.2,44.5,49.9], minor:1, label:"Yönetim", tag:"Akademi semti", title:"Yönetim ve Kurumsal Sistemler", img:"img/akademi.webp",
+    q:"Bilişim yönetimi ve kurumsal sistemler. Üst iki kat iskelede; bu dersleri henüz almadım. Köprüsü ACM şirketine bağlanır.",
+    items:[["ACM105","Bilişim Yönetimi","ok"],["ACM312","Yönetim Bilişim Sistemleri","ok"],["ACM432","Kurumsal Bilgi Sistemleri","wait"],["ACM421","Proje Yönetimi","wait"]], up:"akademi_meydan"},
+  akademi_isletme:{box:[38.5,39.2,41.6,49.8], minor:1, label:"İşletme", tag:"Akademi semti", title:"İşletme ve İktisat", img:"img/akademi.webp",
+    q:"İktisat ve muhasebe. Köprüsü Kristal Kule'ye bağlanır: OptiBean'i bu derslerle yönetiyorum.",
+    items:[["ECON111","Mikroiktisat","ok"],["ECON122","Makroiktisat","ok"],["BBA244","Finansal Muhasebe","ok"],["BBA341","Yönetim Muhasebesi","ok"]], up:"akademi_meydan"},
+  topluluk:{box:[12.5,57.6,27.4,68.9], label:"Topluluk Meydanı", tag:"Eyl 2025 – Haz 2026", title:"Topluluk Meydanı",
+    q:"Yeditepe etkinlik ofisinde görevliydim: yaklaşık 20 etkinliğin organizasyonu, kayıt ve katılımcı takibi, salon ve malzeme hazırlığı.",
+    img:"img/topluluk.webp", img2:"img/topluluk_ic.webp", items:[["Etkinlik ofisi görevlisi","~20 etkinlik","ok"]], links:[]},
+  atolye_avlu:{box:[55.6,48.4,71.6,53.8], label:"Atölye", tag:"Kendi projelerim", title:"Atölye",
+    q:"Ders dışında kendi başıma yaptıklarım. Her pavyon bir uğraş; iskeleler hâlâ sürdüğünü gösterir. Avluda yeni pavyonlar için boş yer var.",
+    img:"img/atolye.webp",
+    items:[["Stüdyo","3D ve Blender","go"],["Oyun","Mobil oyun","go"],["Kod","Python","go"],["Fikirler","Video, 3D baskı, karakter, masa oyunu","wait"]], links:[]},
+  atolye_studyo:{box:[56.5,47.5,60.4,52.1], minor:1, label:"Stüdyo", tag:"Atölye", title:"Stüdyo", img:"img/atolye_studyo.webp",
+    q:"Blender çalışmalarım. Bu şehir ve Kristal Kule burada tasarlandı; masadaki maketler o kulelerin küçültülmüş hâli.",
+    items:[["CV şehri","Blender","go"]], up:"atolye_avlu"},
+  atolye_oyun:{box:[59.7,46.0,63.2,50.0], minor:1, label:"Oyun", tag:"Atölye", title:"Oyun", img:"img/atolye.webp",
+    q:"App Store için çevrimdışı mobil oyun denemelerim. Duvardaki eskizler: bir park oyunu ve üç katmanlı bir dünya.",
+    items:[["Mobil oyun","","go"]], up:"atolye_avlu"},
+  atolye_kod:{box:[63.3,46.0,66.8,50.0], minor:1, label:"Kod", tag:"Atölye", title:"Kod", img:"img/atolye.webp",
+    q:"Python'u temelden öğreniyorum; küçük programlar ve uygulama denemeleri.",
+    items:[["Python","","go"]], up:"atolye_avlu"},
+  atolye_fikirler:{box:[67.1,46.8,69.4,49.1], minor:1, label:"Fikirler", tag:"Atölye", title:"Fikirler duvarı", img:"img/atolye.webp",
+    q:"Henüz başlamadığım dört fikir.",
+    items:[["Video içerik","","wait"],["3D baskı","","wait"],["Karakter tasarımı","","wait"],["Masa oyunu","","wait"]], up:"atolye_avlu"},
+  y2027:{box:[17.1,43.5,25.7,54.0], label:"2027", tag:"İskelede · Hedef", title:"2027 arsası",
+    q:"Ürün ya da iş analisti stajı · Yaz 2027. İskele, ilk stajımla birlikte binaya dönüşecek.",
+    items:[["Ürün / İş Analisti Stajı","Yaz 2027","wait"]], links:[["E-posta gönder","mailto:mehmetokatinn@gmail.com",1],["PDF indir","../Mehmet_Okatin_CV.pdf",0]]}
+};
+var ORDER = ["kristal","akademi_meydan","atolye_avlu","topluluk","acm_kule","y2027"];
+var ST = {ok:["ok",OK], go:["go",GO], wait:["wait",WAIT]};
+
+var map = document.getElementById("map"), panel = document.getElementById("panel"), scrim = document.getElementById("scrim");
+var pBody = document.getElementById("pBody"), pFig = document.getElementById("pFig"), pImg = document.getElementById("pImg");
+var spots = {}, labels = {}, openId = null, lastFocus = null;
+function el(t, c, txt){ var e = document.createElement(t); if (c) e.className = c; if (txt != null) e.textContent = txt; return e; }
+function data(id){ return Y[id].ref ? Y[Y[id].ref] : Y[id]; }
+function area(b){ return (b[2] - b[0]) * (b[3] - b[1]); }
+
+/* kutular: buyukten kucuge eklenir, kucuk olan uste gelir */
+Object.keys(Y).sort(function(a, b){ return area(Y[b].box) - area(Y[a].box); }).forEach(function(id, i){
+  var y = Y[id], d = data(id), b = y.box, s = el("button", "spot");
+  s.style.left = b[0] + "%"; s.style.top = b[1] + "%"; s.style.width = (b[2] - b[0]) + "%"; s.style.height = (b[3] - b[1]) + "%"; s.style.zIndex = 2 + i;
+  s.setAttribute("aria-label", d.title); s.setAttribute("aria-haspopup", "dialog"); s.setAttribute("aria-expanded", "false");
+  s.addEventListener("click", function(){ show(y.ref || id, s); });
+  s.addEventListener("mouseenter", function(){ hot(y.ref || id, true); });
+  s.addEventListener("mouseleave", function(){ hot(y.ref || id, false); });
+  map.appendChild(s); spots[id] = s;
+  if (y.label){
+    var l = el("span", "lbl" + (y.minor ? " minor" : ""), y.label);
+    l.style.left = (b[0] + b[2]) / 2 + "%"; l.style.top = "calc(" + b[1] + "% - 8px)"; l.style.zIndex = 40;
+    l.setAttribute("aria-hidden", "true"); map.appendChild(l); labels[id] = l;
+  }
+});
+function hot(id, on){ if (labels[id]) labels[id].classList.toggle("hot", on); }
+
+/* liste */
+var grid = document.getElementById("grid");
+ORDER.forEach(function(id){
+  var d = Y[id], li = el("li"), b = el("button");
+  b.appendChild(el("b", null, d.title)); b.appendChild(el("span", null, d.q.split(". ")[0].replace(/\.$/, "") + "."));
+  b.setAttribute("aria-haspopup", "dialog");
+  b.addEventListener("click", function(){ show(id, b); });
+  li.appendChild(b); grid.appendChild(li);
+});
+
+function show(id, from){
+  var d = Y[id]; if (!d) return;
+  lastFocus = from || document.activeElement; openId = id;
+  Object.keys(spots).forEach(function(k){ spots[k].setAttribute("aria-expanded", (k === id || Y[k].ref === id) ? "true" : "false"); });
+  if (d.img){ pImg.src = d.img; pImg.alt = d.title; pFig.hidden = false; } else { pFig.hidden = true; pImg.removeAttribute("src"); }
+  pBody.textContent = "";
+  pBody.appendChild(el("div", "eyebrow", d.tag));
+  var h = el("h2", null, d.title); h.id = "pTitle"; pBody.appendChild(h);
+  pBody.appendChild(el("p", "q", d.q));
+  if (d.items && d.items.length){
+    pBody.appendChild(el("h3", null, d.up && d.up === "akademi_meydan" ? "Katlar, alttan üste" : "İçinde"));
+    var ul = el("ul", "items");
+    d.items.forEach(function(it){
+      var li = el("li"), left = el("span", null, it[0]);
+      if (it[1]){ left.appendChild(document.createElement("br")); left.appendChild(el("small", null, it[1])); }
+      li.appendChild(left);
+      if (it[2]){ var st = ST[it[2]]; li.appendChild(el("span", "st " + st[0], st[1])); }
+      ul.appendChild(li);
+    });
+    pBody.appendChild(ul);
+  }
+  var acts = el("div", "acts");
+  (d.links || []).forEach(function(l){
+    var a = el("a", "btn" + (l[2] ? " main" : ""), l[0]); a.href = l[1];
+    if (/\.pdf$/.test(l[1])) a.setAttribute("download", "");
+    acts.appendChild(a);
+  });
+  if (d.up){ var up = el("button", "btn", "← " + Y[d.up].title); up.addEventListener("click", function(){ show(d.up, lastFocus); }); acts.appendChild(up); }
+  if (acts.children.length) pBody.appendChild(acts);
+  panel.classList.add("on"); scrim.classList.add("on"); panel.setAttribute("aria-hidden", "false");
+  panel.scrollTop = 0;
+  document.getElementById("hint").style.opacity = 0;
+  if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
+  setTimeout(function(){ document.getElementById("pClose").focus({preventScroll:true}); }, 60);
+}
+function hide(){
+  if (!openId) return; openId = null;
+  panel.classList.remove("on"); scrim.classList.remove("on"); panel.setAttribute("aria-hidden", "true");
+  Object.keys(spots).forEach(function(k){ spots[k].setAttribute("aria-expanded", "false"); });
+  history.replaceState(null, "", location.pathname + location.search);
+  if (lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
+}
+document.getElementById("pClose").addEventListener("click", hide);
+scrim.addEventListener("click", hide);
+document.addEventListener("keydown", function(e){
+  if (e.key === "Escape") hide();
+  if (e.key === "Tab" && openId){                                 /* odak panelin icinde kalir */
+    var f = panel.querySelectorAll("a,button"), first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+});
+/* adresle acilis: sehir/#akademi gibi */
+var ALIAS = {akademi:"akademi_meydan", atolye:"atolye_avlu", acm:"acm_kule", kule:"kristal", "2027":"y2027"};
+function fromHash(){ var h = decodeURIComponent(location.hash.slice(1)); h = ALIAS[h] || h; if (Y[h] && !Y[h].ref) show(h, spots[h]); }
+if (location.hash) setTimeout(fromHash, 300);
+})();
+</script>
+</body>
+</html>
