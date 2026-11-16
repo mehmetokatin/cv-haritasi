@@ -185,6 +185,33 @@ body.locked{overflow:hidden}
 noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:var(--panel);font-size:15px}
 @media (prefers-reduced-motion:reduce){.card,.card::before,.card::after,.card > *,.sheet,.scrim,.lift div,.stage canvas{transition:none !important}.hint i{animation:none}}
 </style>
+<style id="tagpop-css">
+.toplbl{margin-top:20px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)}
+.top3{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:6px;max-width:440px}
+.top3 button{width:100%;display:flex;align-items:center;gap:12px;padding:9px 12px;background:rgba(5,7,11,.5);border:1px solid var(--rule);color:var(--text);font:inherit;font-size:15px;line-height:1.25;text-align:left;cursor:pointer;transition:border-color .2s}
+.top3 button:hover,.top3 button:focus-visible{border-color:var(--edge);outline:none}
+.top3 .k{flex:1;min-width:0}
+.top3 .k small{display:block;margin-top:2px;font-size:12.5px;color:var(--muted)}
+.top3 .d{font-family:var(--mono);font-size:11px;color:var(--bean);white-space:nowrap}
+.top3 .d::before{content:"";display:inline-block;width:6px;height:6px;margin-right:6px;border-radius:50%;background:var(--bean);vertical-align:1px}
+.top3 .ar{color:var(--muted)}
+.intro .acts{margin-top:14px}
+.narrow .toplbl{margin-top:14px}
+.narrow .top3 button{padding:8px 10px;font-size:14px}
+button.tag{font:inherit;font-size:11px;background:none;color:var(--muted);cursor:pointer;transition:border-color .2s}
+button.tag.ok{color:var(--bean)}
+button.tag::after{content:"?";margin-left:6px;opacity:.55}
+button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{border-color:var(--edge);outline:none}
+#tagpop{position:fixed;z-index:12;width:min(330px,calc(100vw - 24px));padding:14px 16px 12px;background:var(--panel);border:1px solid var(--rule);box-shadow:0 18px 40px rgba(0,0,0,.5);font-size:14px;line-height:1.45;color:var(--text)}
+#tagpop[hidden]{display:none}
+#tagpop .t{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+#tagpop .t.ok{color:var(--bean)}
+#tagpop .t button{margin-left:auto;background:none;border:0;color:var(--muted);font-size:18px;line-height:1;cursor:pointer;padding:2px 4px}
+#tagpop dl{margin:10px 0 0;display:grid;gap:8px}
+#tagpop dt{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--amber)}
+#tagpop dd{margin:2px 0 0}
+#tagpop p{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--rule);font-size:12px;color:var(--muted)}
+</style>
 </head>
 <body>
 <noscript><p>Bu sayfa kaydırmalı bir görsel CV'dir ve JavaScript ister. Klasik CV: <a href="Mehmet_Okatin_CV.pdf">PDF</a> · mehmetokatinn@gmail.com</p></noscript>
@@ -210,7 +237,10 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
     <h1>Mehmet Okatın</h1>
     <p>YBS Öğrencisi · OptiBean Kurucusu · Ürün / İş Analisti Adayı</p>
     <div class="who"><b>Aradığım:</b> Ürün veya iş analisti stajı · 2027 yazı</div>
-    <div class="hint"><i></i>Kaydırın</div>
+    <div class="toplbl">Öne çıkan kanıtlar</div>
+    <ul class="top3"><li><button type="button" data-go="meot"><span class="k">MeoT Prep<small>Ürün sahibi ve geliştirici</small></span><span class="d">Doğrulanmış</span><span class="ar" aria-hidden="true">→</span></button></li><li><button type="button" data-go="uygulama"><span class="k">OptiBean Yönetim Uygulaması<small>Veritabanı ve raporlar</small></span><span class="d">Doğrulanmış</span><span class="ar" aria-hidden="true">→</span></button></li><li><button type="button" data-go="sertifikalar"><span class="k">Google sertifikaları<small>Project Management · AI Essentials</small></span><span class="d">Doğrulanmış</span><span class="ar" aria-hidden="true">→</span></button></li></ul>
+    <div class="acts"><a class="open" href="Mehmet_Okatin_CV.pdf" download data-pdf>PDF indir</a><button class="open quiet" data-cv>Klasik CV</button></div>
+    <div class="hint"><i></i>Kaydırın: kat kat gezin</div>
   </section>
 
   <section class="card" data-seg="ozet" data-name="Özet">
@@ -226,7 +256,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card" data-seg="meot" data-name="MeoT Prep">
-    <div class="eyebrow"><span class="no">01/06</span><span>Yazılım katı</span><span class="tag ok" title="Kanıt linkiyle kontrol edilebilir">Doğrulanmış</span></div>
+    <div class="eyebrow"><span class="no">01/06</span><span>Yazılım katı</span><button type="button" class="tag ok" aria-expanded="false" aria-label="Doğrulanmış: Etiketi açıkla" data-what="Ürün yayında: meot.com.tr" data-how="Bağlantıyı açan herkes ürünü kendisi görür." data-when="16 Kasım 2026">Doğrulanmış</button></div>
     <h2>MeoT Prep</h2>
     <p class="role">Ürün sahibi ve geliştirici · Eyl 2026 – bugün</p>
     <p class="q">Bir öğretmenin saatlerini alan işi, sayıları değişen soru kalıplarına çevirdim.</p>
@@ -238,7 +268,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card" data-seg="uygulama" data-name="OptiBean Uygulaması">
-    <div class="eyebrow"><span class="no">02/06</span><span>Muhasebe katı</span><span class="tag ok" title="Kanıt linkiyle kontrol edilebilir">Doğrulanmış</span></div>
+    <div class="eyebrow"><span class="no">02/06</span><span>Muhasebe katı</span><button type="button" class="tag ok" aria-expanded="false" aria-label="Doğrulanmış: Etiketi açıkla" data-what="Kod herkese açık: github.com/mehmetokatin/optibean" data-how="Depodaki kod ve değişiklik geçmişi incelenebilir." data-when="16 Kasım 2026">Doğrulanmış</button></div>
     <h2>OptiBean Yönetim Uygulaması</h2>
     <p class="role">Ürün sahibi ve geliştirici · Eyl 2026 – bugün</p>
     <p class="q">Mağazamın kâğıttaki gün sonunu 10 tabloluk bir veritabanına taşıdım.</p>
@@ -250,7 +280,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card" data-seg="optibean" data-name="OptiBean">
-    <div class="eyebrow"><span class="no">03/06</span><span>Satış katı</span><span class="tag ok" title="Kanıt linkiyle kontrol edilebilir">Doğrulanmış</span></div>
+    <div class="eyebrow"><span class="no">03/06</span><span>Satış katı</span><button type="button" class="tag ok" aria-expanded="false" aria-label="Doğrulanmış: Etiketi açıkla" data-what="Markanın sitesi: optibean.com.tr" data-how="Site ve satış kanalları açıkça görülebilir." data-when="16 Kasım 2026">Doğrulanmış</button></div>
     <h2>OptiBean</h2>
     <p class="role">Kurucu ve sahibi · Nis 2025 – bugün</p>
     <p class="q">Kendi dondurma markamı kurdum.</p>
@@ -262,7 +292,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card" data-seg="balim" data-name="Balım Dondurma">
-    <div class="eyebrow"><span class="no">04/06</span><span>Üretim katı</span><span class="tag" title="Kendi beyanım; kanıt linki yok">Beyan</span></div>
+    <div class="eyebrow"><span class="no">04/06</span><span>Üretim katı</span><button type="button" class="tag" aria-expanded="false" aria-label="Beyan: Etiketi açıkla" data-what="Henüz kanıt linki ya da referans yok." data-how="Referans eklenince etiket Referanslı olacak." data-when="—">Beyan</button></div>
     <h2>Balım Dondurma</h2>
     <p class="role">Operasyon Müdürü (sezonluk) · Nis 2018 – Eyl 2026</p>
     <p class="q">Sekiz yaz sezonu boyunca bir dondurmacının operasyonunu yönettim.</p>
@@ -273,7 +303,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card" data-seg="sertifikalar" data-name="Google sertifikaları">
-    <div class="eyebrow"><span class="no">05/06</span><span>Toplantı katı</span><span class="tag ok" title="Kanıt linkiyle kontrol edilebilir">Doğrulanmış</span></div>
+    <div class="eyebrow"><span class="no">05/06</span><span>Toplantı katı</span><button type="button" class="tag ok" aria-expanded="false" aria-label="Doğrulanmış: Etiketi açıkla" data-what="Coursera doğrulama sayfaları" data-how="Coursera, sertifikanın sahibini ve tarihini gösterir (22 Ekim 2026)." data-when="16 Kasım 2026">Doğrulanmış</button></div>
     <h2>Google sertifikaları</h2>
     <p class="role">Coursera · Ekim 2026</p>
     <p class="q">Proje yönetimi ve yapay zekâ temellerini sertifikalandırdım.</p>
@@ -288,7 +318,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card" data-seg="yeditepe" data-name="Yeditepe YBS">
-    <div class="eyebrow"><span class="no">06/06</span><span>Depo katı</span><span class="tag" title="Kendi beyanım; kanıt linki yok">Beyan</span></div>
+    <div class="eyebrow"><span class="no">06/06</span><span>Depo katı</span><button type="button" class="tag" aria-expanded="false" aria-label="Beyan: Etiketi açıkla" data-what="Öğrenim bilgisi kendi beyanım." data-how="Öğrenci belgesi eklenince etiket Doğrulanmış olacak." data-when="—">Beyan</button></div>
     <h2>Yeditepe Üniversitesi</h2>
     <p class="role">YBS Lisans (İngilizce) · 2023 – 2028</p>
     <p class="q">Sistem analizi, veritabanı ve algoritma temeli.</p>
@@ -784,6 +814,46 @@ window.addEventListener("resize", function(){ var w = document.documentElement.c
 window.addEventListener("hashchange", route);
 lastW = document.documentElement.clientWidth;
 layout(); queue(); route(); requestAnimationFrame(tick);
+})();
+</script>
+<script id="tagpop-js">
+(function(){
+  var L = {"h_what": "Ne kanıtlıyor", "h_how": "Nasıl kontrol edilir", "h_when": "Son kontrol", "legend": "Doğrulanmış: kanıt linki var · Referanslı: birlikte çalışılan kişi onaylı · Beyan: kendi sözüm", "close": "Kapat"};
+  var pop = document.createElement("div");
+  pop.id = "tagpop"; pop.hidden = true; pop.setAttribute("role", "dialog");
+  document.body.appendChild(pop);
+  var cur = null;
+  function esc(t){ var d = document.createElement("div"); d.textContent = t; return d.innerHTML; }
+  function close(){ if (cur) cur.setAttribute("aria-expanded", "false"); cur = null; pop.hidden = true; }
+  function open(b){
+    cur = b; b.setAttribute("aria-expanded", "true");
+    pop.setAttribute("aria-label", b.textContent);
+    pop.innerHTML = '<div class="t' + (b.classList.contains("ok") ? " ok" : "") + '">' + esc(b.textContent) +
+      '<button type="button" aria-label="' + esc(L.close) + '">×</button></div><dl>' +
+      '<div><dt>' + esc(L.h_what) + '</dt><dd>' + esc(b.dataset.what) + '</dd></div>' +
+      '<div><dt>' + esc(L.h_how) + '</dt><dd>' + esc(b.dataset.how) + '</dd></div>' +
+      '<div><dt>' + esc(L.h_when) + '</dt><dd>' + esc(b.dataset.when) + '</dd></div></dl>' +
+      '<p>' + esc(L.legend) + '</p>';
+    pop.hidden = false;
+    var r = b.getBoundingClientRect(), vw = window.innerWidth, vh = window.innerHeight;
+    var w = pop.offsetWidth, h = pop.offsetHeight;
+    var left = Math.max(12, Math.min(r.right - w, vw - w - 12));
+    var top = r.top - h - 10 >= 12 ? r.top - h - 10 : Math.min(r.bottom + 10, vh - h - 12);
+    pop.style.left = left + "px"; pop.style.top = Math.max(12, top) + "px";
+    pop.querySelector("button").focus({preventScroll: true});
+  }
+  document.addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest("button.tag") : null;
+    if (b){ e.preventDefault(); var same = b === cur; close(); if (!same) open(b); return; }
+    if (e.target.closest && e.target.closest("#tagpop")){
+      if (e.target.closest("#tagpop .t button")){ var c = cur; close(); if (c) c.focus({preventScroll: true}); }
+      return;
+    }
+    close();
+  });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && cur){ var c = cur; close(); c.focus({preventScroll: true}); } });
+  window.addEventListener("scroll", close, {passive: true});
+  window.addEventListener("resize", close);
 })();
 </script>
 </body>

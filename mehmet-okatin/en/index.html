@@ -185,6 +185,33 @@ body.locked{overflow:hidden}
 noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:var(--panel);font-size:15px}
 @media (prefers-reduced-motion:reduce){.card,.card::before,.card::after,.card > *,.sheet,.scrim,.lift div,.stage canvas{transition:none !important}.hint i{animation:none}}
 </style>
+<style id="tagpop-css">
+.toplbl{margin-top:20px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)}
+.top3{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:6px;max-width:440px}
+.top3 button{width:100%;display:flex;align-items:center;gap:12px;padding:9px 12px;background:rgba(5,7,11,.5);border:1px solid var(--rule);color:var(--text);font:inherit;font-size:15px;line-height:1.25;text-align:left;cursor:pointer;transition:border-color .2s}
+.top3 button:hover,.top3 button:focus-visible{border-color:var(--edge);outline:none}
+.top3 .k{flex:1;min-width:0}
+.top3 .k small{display:block;margin-top:2px;font-size:12.5px;color:var(--muted)}
+.top3 .d{font-family:var(--mono);font-size:11px;color:var(--bean);white-space:nowrap}
+.top3 .d::before{content:"";display:inline-block;width:6px;height:6px;margin-right:6px;border-radius:50%;background:var(--bean);vertical-align:1px}
+.top3 .ar{color:var(--muted)}
+.intro .acts{margin-top:14px}
+.narrow .toplbl{margin-top:14px}
+.narrow .top3 button{padding:8px 10px;font-size:14px}
+button.tag{font:inherit;font-size:11px;background:none;color:var(--muted);cursor:pointer;transition:border-color .2s}
+button.tag.ok{color:var(--bean)}
+button.tag::after{content:"?";margin-left:6px;opacity:.55}
+button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{border-color:var(--edge);outline:none}
+#tagpop{position:fixed;z-index:12;width:min(330px,calc(100vw - 24px));padding:14px 16px 12px;background:var(--panel);border:1px solid var(--rule);box-shadow:0 18px 40px rgba(0,0,0,.5);font-size:14px;line-height:1.45;color:var(--text)}
+#tagpop[hidden]{display:none}
+#tagpop .t{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+#tagpop .t.ok{color:var(--bean)}
+#tagpop .t button{margin-left:auto;background:none;border:0;color:var(--muted);font-size:18px;line-height:1;cursor:pointer;padding:2px 4px}
+#tagpop dl{margin:10px 0 0;display:grid;gap:8px}
+#tagpop dt{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--amber)}
+#tagpop dd{margin:2px 0 0}
+#tagpop p{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--rule);font-size:12px;color:var(--muted)}
+</style>
 </head>
 <body>
 <noscript><p>This page is a scrolling visual CV and needs JavaScript. Classic CV: <a href="Mehmet_Okatin_CV_EN.pdf">PDF</a> · mehmetokatinn@gmail.com</p></noscript>
@@ -210,7 +237,10 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
     <h1>Mehmet Okatın</h1>
     <p>MIS Student · Founder of OptiBean · Aspiring Product / Business Analyst</p>
     <div class="who"><b>Looking for:</b> Product or business analyst internship · Summer 2027</div>
-    <div class="hint"><i></i>Scroll</div>
+    <div class="toplbl">Key evidence</div>
+    <ul class="top3"><li><button type="button" data-go="meot"><span class="k">MeoT Prep<small>Product owner and developer</small></span><span class="d">Verified</span><span class="ar" aria-hidden="true">→</span></button></li><li><button type="button" data-go="uygulama"><span class="k">OptiBean Management App<small>Database and reports</small></span><span class="d">Verified</span><span class="ar" aria-hidden="true">→</span></button></li><li><button type="button" data-go="sertifikalar"><span class="k">Google certificates<small>Project Management · AI Essentials</small></span><span class="d">Verified</span><span class="ar" aria-hidden="true">→</span></button></li></ul>
+    <div class="acts"><a class="open" href="Mehmet_Okatin_CV_EN.pdf" download data-pdf>Download PDF</a><button class="open quiet" data-cv>Classic CV</button></div>
+    <div class="hint"><i></i>Scroll to tour floor by floor</div>
   </section>
 
   <section class="card" data-seg="ozet" data-name="Summary">
@@ -226,7 +256,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card" data-seg="meot" data-name="MeoT Prep">
-    <div class="eyebrow"><span class="no">01/06</span><span>Software floor</span><span class="tag ok" title="Can be checked via the evidence link">Verified</span></div>
+    <div class="eyebrow"><span class="no">01/06</span><span>Software floor</span><button type="button" class="tag ok" aria-expanded="false" aria-label="Verified: Explain this tag" data-what="Live product: meot.com.tr" data-how="Anyone opening the link can see the product." data-when="16 Nov 2026">Verified</button></div>
     <h2>MeoT Prep</h2>
     <p class="role">Product owner &amp; developer · Sep 2026 – present</p>
     <p class="q">I turned work that took a teacher hours into question templates whose numbers change every time.</p>
@@ -238,7 +268,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card" data-seg="uygulama" data-name="OptiBean App">
-    <div class="eyebrow"><span class="no">02/06</span><span>Accounting floor</span><span class="tag ok" title="Can be checked via the evidence link">Verified</span></div>
+    <div class="eyebrow"><span class="no">02/06</span><span>Accounting floor</span><button type="button" class="tag ok" aria-expanded="false" aria-label="Verified: Explain this tag" data-what="Public code: github.com/mehmetokatin/optibean" data-how="The code and its commit history can be reviewed." data-when="16 Nov 2026">Verified</button></div>
     <h2>OptiBean Management App</h2>
     <p class="role">Product owner &amp; developer · Sep 2026 – present</p>
     <p class="q">I moved my store's paper end-of-day records into a 10-table database.</p>
@@ -250,7 +280,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card" data-seg="optibean" data-name="OptiBean">
-    <div class="eyebrow"><span class="no">03/06</span><span>Sales floor</span><span class="tag ok" title="Can be checked via the evidence link">Verified</span></div>
+    <div class="eyebrow"><span class="no">03/06</span><span>Sales floor</span><button type="button" class="tag ok" aria-expanded="false" aria-label="Verified: Explain this tag" data-what="Brand website: optibean.com.tr" data-how="The site and sales channels are publicly visible." data-when="16 Nov 2026">Verified</button></div>
     <h2>OptiBean</h2>
     <p class="role">Founder &amp; owner · Apr 2025 – present</p>
     <p class="q">I founded my own ice cream brand.</p>
@@ -262,7 +292,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card" data-seg="balim" data-name="Balım Dondurma">
-    <div class="eyebrow"><span class="no">04/06</span><span>Production floor</span><span class="tag" title="Self-reported; no evidence link">Self-reported</span></div>
+    <div class="eyebrow"><span class="no">04/06</span><span>Production floor</span><button type="button" class="tag" aria-expanded="false" aria-label="Self-reported: Explain this tag" data-what="No evidence link or reference yet." data-how="Becomes Referenced once a reference is added." data-when="—">Self-reported</button></div>
     <h2>Balım Dondurma</h2>
     <p class="role">Operations Manager (seasonal) · Apr 2018 – Sep 2026</p>
     <p class="q">I ran an ice cream shop's operations for eight summer seasons.</p>
@@ -273,7 +303,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card" data-seg="sertifikalar" data-name="Google certificates">
-    <div class="eyebrow"><span class="no">05/06</span><span>Meeting floor</span><span class="tag ok" title="Can be checked via the evidence link">Verified</span></div>
+    <div class="eyebrow"><span class="no">05/06</span><span>Meeting floor</span><button type="button" class="tag ok" aria-expanded="false" aria-label="Verified: Explain this tag" data-what="Coursera verification pages" data-how="Coursera shows the holder and completion date (22 Oct 2026)." data-when="16 Nov 2026">Verified</button></div>
     <h2>Google certificates</h2>
     <p class="role">Coursera · Oct 2026</p>
     <p class="q">I earned certificates in project management and AI fundamentals.</p>
@@ -288,7 +318,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
   </section>
 
   <section class="card" data-seg="yeditepe" data-name="Yeditepe MIS">
-    <div class="eyebrow"><span class="no">06/06</span><span>Storage floor</span><span class="tag" title="Self-reported; no evidence link">Self-reported</span></div>
+    <div class="eyebrow"><span class="no">06/06</span><span>Storage floor</span><button type="button" class="tag" aria-expanded="false" aria-label="Self-reported: Explain this tag" data-what="Education details are my own statement." data-how="Becomes Verified once a student certificate is added." data-when="—">Self-reported</button></div>
     <h2>Yeditepe University</h2>
     <p class="role">BSc Management Information Systems (taught in English) · 2023 – 2028</p>
     <p class="q">Foundations in systems analysis, databases and algorithms.</p>
@@ -784,6 +814,46 @@ window.addEventListener("resize", function(){ var w = document.documentElement.c
 window.addEventListener("hashchange", route);
 lastW = document.documentElement.clientWidth;
 layout(); queue(); route(); requestAnimationFrame(tick);
+})();
+</script>
+<script id="tagpop-js">
+(function(){
+  var L = {"h_what": "What it proves", "h_how": "How to check", "h_when": "Last checked", "legend": "Verified: evidence link · Referenced: confirmed by someone I worked with · Self-reported: my own statement", "close": "Close"};
+  var pop = document.createElement("div");
+  pop.id = "tagpop"; pop.hidden = true; pop.setAttribute("role", "dialog");
+  document.body.appendChild(pop);
+  var cur = null;
+  function esc(t){ var d = document.createElement("div"); d.textContent = t; return d.innerHTML; }
+  function close(){ if (cur) cur.setAttribute("aria-expanded", "false"); cur = null; pop.hidden = true; }
+  function open(b){
+    cur = b; b.setAttribute("aria-expanded", "true");
+    pop.setAttribute("aria-label", b.textContent);
+    pop.innerHTML = '<div class="t' + (b.classList.contains("ok") ? " ok" : "") + '">' + esc(b.textContent) +
+      '<button type="button" aria-label="' + esc(L.close) + '">×</button></div><dl>' +
+      '<div><dt>' + esc(L.h_what) + '</dt><dd>' + esc(b.dataset.what) + '</dd></div>' +
+      '<div><dt>' + esc(L.h_how) + '</dt><dd>' + esc(b.dataset.how) + '</dd></div>' +
+      '<div><dt>' + esc(L.h_when) + '</dt><dd>' + esc(b.dataset.when) + '</dd></div></dl>' +
+      '<p>' + esc(L.legend) + '</p>';
+    pop.hidden = false;
+    var r = b.getBoundingClientRect(), vw = window.innerWidth, vh = window.innerHeight;
+    var w = pop.offsetWidth, h = pop.offsetHeight;
+    var left = Math.max(12, Math.min(r.right - w, vw - w - 12));
+    var top = r.top - h - 10 >= 12 ? r.top - h - 10 : Math.min(r.bottom + 10, vh - h - 12);
+    pop.style.left = left + "px"; pop.style.top = Math.max(12, top) + "px";
+    pop.querySelector("button").focus({preventScroll: true});
+  }
+  document.addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest("button.tag") : null;
+    if (b){ e.preventDefault(); var same = b === cur; close(); if (!same) open(b); return; }
+    if (e.target.closest && e.target.closest("#tagpop")){
+      if (e.target.closest("#tagpop .t button")){ var c = cur; close(); if (c) c.focus({preventScroll: true}); }
+      return;
+    }
+    close();
+  });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && cur){ var c = cur; close(); c.focus({preventScroll: true}); } });
+  window.addEventListener("scroll", close, {passive: true});
+  window.addEventListener("resize", close);
 })();
 </script>
 </body>
