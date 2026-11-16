@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV Haritası — Deneyimini bir şehre dönüştür</title>
+<meta name="description" content="CV Haritası: deneyimlerin binalara, binaların bir şehre dönüştüğü görsel CV. Yakında herkese açık.">
+<meta name="theme-color" content="#05070b">
+<meta property="og:title" content="CV Haritası">
+<meta property="og:description" content="Deneyimini bir şehre dönüştür. İlk şehir: Mehmet Okatın.">
+<meta property="og:image" content="mehmet-okatin/tur/t_0001.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#05070b;
+    --line:rgba(255,255,255,.72);
+    --warm:#f2c46b;
+    --mute:rgba(255,255,255,.6);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--ink);color:#fff;
+    font-family:"Jost",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+  .sahne{
+    position:fixed;inset:0;
+    background:url("mehmet-okatin/tur/t_0001.webp") center 40%/cover no-repeat;
+    transform:scale(1.08);
+    animation:yaklas 14s ease-out forwards;
+  }
+  .sahne::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(5,7,11,.55) 0%,rgba(5,7,11,.05) 35%,rgba(5,7,11,.15) 60%,rgba(5,7,11,.92) 100%);
+  }
+  @keyframes yaklas{to{transform:scale(1)}}
+  main{
+    position:relative;z-index:1;height:100%;
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:clamp(24px,5vw,56px);
+  }
+  .ust{display:flex;justify-content:space-between;align-items:center;
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+  .marka{color:#fff}
+  .alt{max-width:640px;opacity:0;transform:translateY(16px);animation:gel 1.2s .6s ease-out forwards}
+  @keyframes gel{to{opacity:1;transform:none}}
+  .etiket{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--warm);border:1px solid rgba(242,196,107,.5);padding:6px 10px;margin-bottom:18px}
+  h1{font-weight:500;font-size:clamp(34px,6vw,64px);line-height:1.05;letter-spacing:-.01em}
+  p{margin-top:14px;font-size:clamp(16px,2vw,19px);line-height:1.5;color:var(--mute)}
+  .dugme{
+    display:inline-flex;align-items:center;gap:12px;margin-top:28px;
+    padding:14px 22px;border:1px solid var(--line);color:#fff;text-decoration:none;
+    font-size:16px;letter-spacing:.02em;transition:background .25s,color .25s;
+  }
+  .dugme:hover,.dugme:focus-visible{background:#fff;color:var(--ink);outline:none}
+  .dugme span{transition:transform .25s}
+  .dugme:hover span{transform:translateX(4px)}
+  footer{margin-top:28px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;color:rgba(255,255,255,.4)}
+  @media (prefers-reduced-motion:reduce){.sahne,.alt{animation:none;transform:none;opacity:1}}
+</style>
+</head>
+<body>
+  <div class="sahne" aria-hidden="true"></div>
+  <main>
+    <div class="ust">
+      <span class="marka">CV Haritası</span>
+      <span>Yakında</span>
+    </div>
+    <div class="alt">
+      <span class="etiket">İlk şehir açıldı</span>
+      <h1>Deneyimin bir şehre dönüşsün.</h1>
+      <p>Her deneyim bir bina, her bina bir kanıt. CV Haritası yakında herkese açılıyor. İlk şehri şimdi gez.</p>
+      <a class="dugme" href="mehmet-okatin/">Mehmet Okatın'ın şehrini gez <span>→</span></a>
+      <footer>© 2026 CV Haritası · Tasarım ve kurgu: Mehmet Okatın · Claude ile geliştirildi</footer>
+    </div>
+  </main>
+</body>
+</html>
