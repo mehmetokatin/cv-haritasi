@@ -640,7 +640,8 @@ function tick(now){
 }
 function go(id, smooth){
   var s = byId[id]; if (!s) return;
-  window.scrollTo({top:s.y0 + (s.y1 - s.y0) * 0.4, behavior:(smooth && !reduce) ? "smooth" : "auto"});
+  if (smooth && typeof glide === "function") glide(s);
+  else window.scrollTo(0, Math.round(s.y0 + (s.y1 - s.y0) * 0.4));
 }
 
 /* ---------- cekmece: klasik CV ---------- */
@@ -694,42 +695,59 @@ document.addEventListener("click", function(e){
 });
 document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeSheet(); });
 
-/* ---------- durak miknatisi ----------
-   Kaydirma durunca yolun ortasinda kalinmaz: gidilen yondeki durağa yumusakca oturur.
-   Klavye: asagi ok / PageDown / bosluk sonraki durak, yukari ok / PageUp onceki durak. */
-var lastY = window.scrollY || 0, dir = 1, idleT = 0, snapTo = -1, snapT = 0;
-function stopY(s){ return s.y0 + (s.y1 - s.y0) * 0.4; }
+/* ---------- bir hareket = bir kat ----------
+   Tekerlek, trackpad, parmak kaydirma ve klavye: her hareket yalnizca bir sonraki/onceki durağa gider ve orada kilitlenir.
+   Trackpad'in atalet (kayma) olaylari yutulur; yeni hareket ancak el durduktan sonra kabul edilir.
+   Kaydirma cubugu surüklenirse birakildigi yerde en yakin durağa oturur. */
+var GLIDE_MS = 1300, QUIET_MS = 220, WHEEL_MIN = 24, SWIPE_MIN = 40;
+var anim = null, lockUntilQuiet = false, lastWheel = 0, acc = 0, idleT = 0, lastY = window.scrollY || 0, dir = 1;
+function stopY(s){ return Math.round(s.y0 + (s.y1 - s.y0) * 0.4); }
 function curIndex(y){
-  for (var k = 0; k < SEG.length; k++){
-    var n = SEG[k + 1];
-    if (!n || y < n.y0) return k;
-  }
+  for (var k = 0; k < SEG.length; k++){ var n = SEG[k + 1]; if (!n || y < n.y0) return k; }
   return SEG.length - 1;
 }
+function inSheet(t){ return sheetOpen || (t && t.closest && t.closest("#sheet")); }
 function glide(s){
-  snapTo = stopY(s); clearTimeout(snapT);
-  snapT = setTimeout(function(){ snapTo = -1; }, 1600);
-  window.scrollTo({top:snapTo, behavior:reduce ? "auto" : "smooth"});
+  var from = window.scrollY || 0, to = stopY(s);
+  if (Math.abs(to - from) < 2){ anim = null; return; }
+  if (reduce){ window.scrollTo(0, to); anim = null; return; }
+  anim = {from:from, to:to, t0:performance.now()};
+  (function frame(now){
+    if (!anim) return;
+    var p = Math.min(1, (now - anim.t0) / GLIDE_MS);
+    var e = p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;   /* yavas basla, yavas dur */
+    window.scrollTo(0, anim.from + (anim.to - anim.from) * e);
+    if (p < 1) requestAnimationFrame(frame); else anim = null;
+  })(anim.t0);
 }
-function snap(){
-  if (sheetOpen || snapTo >= 0) return;
-  var y = window.scrollY || 0;
-  for (var k = 0; k < SEG.length - 1; k++){
-    var s = SEG[k], n = SEG[k + 1];
-    if (y >= s.y0 && y <= s.y1) return;                       /* zaten durakta */
-    if (y > s.y1 && y < n.y0){
-      var t = (y - s.y1) / (n.y0 - s.y1);
-      glide(t < .12 ? s : t > .88 ? n : (dir > 0 ? n : s));
-      return;
-    }
+function step(d){
+  var y = window.scrollY || 0, k = curIndex(y), s = SEG[k], inHold = y >= s.y0 - 2 && y <= s.y1 + 2;
+  var target = d > 0 ? Math.min(SEG.length - 1, k + 1) : (inHold ? Math.max(0, k - 1) : k);
+  if (anim){                                                   /* animasyon surerken hedefin bir otesi */
+    var cur = SEG.map(stopY).indexOf(anim.to);
+    if (cur >= 0) target = Math.max(0, Math.min(SEG.length - 1, cur + d));
   }
+  glide(SEG[target]);
 }
-window.addEventListener("scroll", function(){
-  var y = window.scrollY || 0;
-  if (y !== lastY) dir = y > lastY ? 1 : -1;
-  lastY = y;
-  if (snapTo >= 0 && Math.abs(y - snapTo) < 2){ snapTo = -1; clearTimeout(snapT); }
-  clearTimeout(idleT); idleT = setTimeout(snap, 160);
+window.addEventListener("wheel", function(e){
+  if (inSheet(e.target) || e.ctrlKey) return;                 /* cekmece kendi kayar; ctrl = yakinlastirma */
+  e.preventDefault();
+  var now = performance.now(), gap = now - lastWheel; lastWheel = now;
+  if (lockUntilQuiet){
+    if (gap > QUIET_MS && !anim) lockUntilQuiet = false;      /* el durdu: yeni hareket kabul */
+    else return;
+  }
+  if (gap > QUIET_MS) acc = 0;
+  acc += e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
+  if (Math.abs(acc) >= WHEEL_MIN){ step(acc > 0 ? 1 : -1); acc = 0; lockUntilQuiet = true; }
+}, {passive:false});
+var touchY = null;
+window.addEventListener("touchstart", function(e){ touchY = inSheet(e.target) ? null : e.touches[0].clientY; }, {passive:true});
+window.addEventListener("touchmove", function(e){ if (touchY !== null) e.preventDefault(); }, {passive:false});
+window.addEventListener("touchend", function(e){
+  if (touchY === null) return;
+  var dy = touchY - e.changedTouches[0].clientY; touchY = null;
+  if (Math.abs(dy) >= SWIPE_MIN) step(dy > 0 ? 1 : -1);
 }, {passive:true});
 document.addEventListener("keydown", function(e){
   if (sheetOpen || e.metaKey || e.ctrlKey || e.altKey) return;
@@ -737,13 +755,23 @@ document.addEventListener("keydown", function(e){
   if (tag === "INPUT" || tag === "TEXTAREA") return;
   var down = e.key === "ArrowDown" || e.key === "PageDown" || (e.key === " " && !e.shiftKey);
   var up = e.key === "ArrowUp" || e.key === "PageUp" || (e.key === " " && e.shiftKey);
+  if (e.key === "Home"){ e.preventDefault(); glide(SEG[0]); return; }
+  if (e.key === "End"){ e.preventDefault(); glide(SEG[SEG.length - 1]); return; }
   if (!down && !up) return;
-  e.preventDefault();
-  var k = curIndex(window.scrollY || 0), s = SEG[k];
-  var y = window.scrollY || 0, inHold = y >= s.y0 && y <= s.y1;
-  var target = down ? Math.min(SEG.length - 1, k + 1) : (inHold ? Math.max(0, k - 1) : k);
-  glide(SEG[target]);
+  e.preventDefault(); step(down ? 1 : -1);
 });
+/* kaydirma cubugu ile birakilan yer: en yakin durak */
+window.addEventListener("scroll", function(){
+  var y = window.scrollY || 0; if (y !== lastY) dir = y > lastY ? 1 : -1; lastY = y;
+  if (anim) return;
+  clearTimeout(idleT);
+  idleT = setTimeout(function(){
+    if (anim || sheetOpen) return;
+    var yy = window.scrollY || 0, best = 0, bd = 1e9;
+    SEG.forEach(function(s, i){ var d = Math.abs(stopY(s) - yy); if (d < bd){ bd = d; best = i; } });
+    if (bd > 2) glide(SEG[best]);
+  }, 250);
+}, {passive:true});
 
 /* ---------- baslangic ---------- */
 function route(){
