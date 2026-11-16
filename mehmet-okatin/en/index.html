@@ -187,7 +187,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
 </style>
 </head>
 <body>
-<noscript><p>This page is a scrolling visual CV and needs JavaScript. Classic CV: <a href="../Mehmet_Okatin_CV.pdf">PDF</a> · mehmetokatinn@gmail.com</p></noscript>
+<noscript><p>This page is a scrolling visual CV and needs JavaScript. Classic CV: <a href="Mehmet_Okatin_CV_EN.pdf">PDF</a> · mehmetokatinn@gmail.com</p></noscript>
 <div class="boot" id="boot" aria-hidden="true"><div><span>Mehmet Okatın <b>CV</b></span><i></i></div></div>
 <div class="stage" aria-hidden="true"><canvas id="cv"></canvas></div>
 <div class="shade" aria-hidden="true"></div>
@@ -304,7 +304,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
     <h2>Contact</h2>
     <p class="q">Get in touch.</p>
     <div class="acts">
-      <a class="open" href="../Mehmet_Okatin_CV.pdf" download data-pdf>Download PDF</a>
+      <a class="open" href="Mehmet_Okatin_CV_EN.pdf" download data-pdf>Download PDF</a>
       <a class="open quiet" href="mailto:mehmetokatinn@gmail.com" data-mail>Send email</a>
       <button class="open quiet" data-cv>Classic CV</button>
     </div>
@@ -399,7 +399,7 @@ noscript p{position:relative;z-index:30;margin:0;padding:14px 20px;background:va
     </div>
   </div>
   <div class="foot">
-    <a class="open" href="../Mehmet_Okatin_CV.pdf" download data-pdf>Download PDF</a>
+    <a class="open" href="Mehmet_Okatin_CV_EN.pdf" download data-pdf>Download PDF</a>
     <a class="open quiet" href="mailto:mehmetokatinn@gmail.com" data-mail>Send email</a>
     <p class="mail">mehmetokatinn@gmail.com</p>
     <p class="toast" id="toast" role="status"></p>
@@ -661,7 +661,7 @@ function closeSheet(){
 /* ---------- PDF ----------
    Kendi alan adinda duz indirme baglantisi calisir. claude.ai icinde sayfa dosyayi kendi indiremez;
    orada izinli "downloads" yoluyla kaydedilir. Olmazsa klasik CV cekmecesi acilir. */
-var PDF = "../Mehmet_Okatin_CV.pdf";
+var PDF = "Mehmet_Okatin_CV_EN.pdf";
 var saver = null;
 function getSaver(){
   if (!saver && window.claude && typeof window.claude.use === "function") saver = window.claude.use("downloads");
@@ -674,7 +674,7 @@ function pdf(e, el){
   if (el.getAttribute("aria-busy") === "true") return;
   el.setAttribute("aria-busy", "true");
   Promise.all([saver, fetch(PDF).then(function(r){ if (!r.ok) throw {code:"missing"}; return r.blob(); })])
-    .then(function(v){ if (!v[0]) throw {code:"unavailable"}; return v[0].save({filename:"Mehmet_Okatin_CV.pdf", data:v[1]}); })
+    .then(function(v){ if (!v[0]) throw {code:"unavailable"}; return v[0].save({filename:"Mehmet_Okatin_CV_EN.pdf", data:v[1]}); })
     .then(function(){ $("toast").textContent = ""; }, function(err){
       if (err && err.code === "declined") return;
       openSheet(); $("toast").textContent = "The PDF couldn't be downloaded here. The full classic CV is above.";
