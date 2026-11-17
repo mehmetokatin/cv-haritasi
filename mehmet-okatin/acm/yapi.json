@@ -17,7 +17,7 @@
  },
  "baslik": "Sorunları kat kat çıkarak çözüyorum.",
  "aciklama": "ACM dersinde öğrendiklerimi hayali bir şirketin katlarında uyguladım. Her kat bir departman, her katta bir sorun var: nasıl dinlediğimi, analiz ettiğimi ve çözdüğümü adım adım gösteriyorum.",
- "kapak": "kareler/dis_yansima.webp",
+ "kapak": "../sehir/img/iki_kule.webp",
  "dogrulama": {
   "durum": "beyan",
   "not": "Hoca onayı henüz alınmadı."
