@@ -33,7 +33,7 @@ a{color:inherit}
 .hud{position:fixed;z-index:20;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 22px;
   background:linear-gradient(var(--ink),rgba(5,7,11,0))}
 .brand{font-weight:600;letter-spacing:.02em;text-decoration:none}
-.brand span{font-family:var(--mono);font-size:12px;color:var(--amber);margin-left:8px;letter-spacing:.12em;text-transform:uppercase}
+.brand span{font-family:var(--mono);font-size:12px;color:var(--bean);margin-left:8px;letter-spacing:.12em;text-transform:uppercase}
 .hudr{display:flex;gap:8px}
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;
   padding:8px 12px;border:1px solid var(--rule);border-radius:999px;background:rgba(13,16,22,.6);backdrop-filter:blur(6px);transition:border-color .2s,background .2s}
@@ -42,7 +42,7 @@ a{color:inherit}
 
 /* sahne: resim ekrana sigar, kutular resimle birlikte olceklenir */
 .scene{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:64px 0 24px}
-.map{position:relative;width:min(100vw,calc((100vh - 88px) * 16 / 9));aspect-ratio:16/9}
+.map{position:relative;isolation:isolate;width:min(100vw,calc((100vh - 88px) * 16 / 9));aspect-ratio:16/9}
 .map img{display:block;width:100%;height:100%;object-fit:cover;user-select:none}
 .map::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 80px 30px var(--ink)}
 .spot{position:absolute;border-radius:6px;transition:background .2s,box-shadow .2s}
@@ -52,13 +52,15 @@ a{color:inherit}
   color:var(--text);padding:3px 8px;border-radius:999px;background:rgba(5,7,11,.72);border:1px solid var(--rule);transition:border-color .2s,color .2s}
 .lbl::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:10px;background:var(--rule)}
 .lbl.hot{border-color:var(--amber);color:var(--amber)}
+.lbl.minor{opacity:0;transition:opacity .2s}
+.lbl.minor.hot{opacity:1;z-index:50 !important}
 .hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em;
   background:rgba(5,7,11,.6);padding:6px 12px;border-radius:999px;pointer-events:none;transition:opacity .4s;white-space:nowrap}
 
 /* panel */
-.panel{position:fixed;z-index:30;top:0;right:0;bottom:0;width:min(440px,100vw);background:var(--panel);border-left:1px solid var(--rule);
-  transform:translateX(102%);transition:transform .45s cubic-bezier(.6,0,.2,1);overflow-y:auto;overscroll-behavior:contain}
-.panel.on{transform:none}
+.panel{position:fixed;z-index:30;top:0;right:0;bottom:0;width:min(440px,100vw);background:var(--panel);border-left:1px solid var(--rule);visibility:hidden;
+  transform:translateX(102%);transition:transform .45s cubic-bezier(.6,0,.2,1),visibility 0s .45s;overflow-y:auto;overscroll-behavior:contain}
+.panel.on{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.6,0,.2,1)}
 .panel figure{margin:0;aspect-ratio:16/9;background:#000;overflow:hidden}
 .panel figure img{width:100%;height:100%;object-fit:cover;display:block}
 .pbody{padding:22px 24px 32px}
@@ -94,7 +96,6 @@ footer{max-width:1100px;margin:0 auto;padding:0 22px 40px;color:var(--muted);fon
   .scene{min-height:0;padding:64px 0 0;display:block}
   .map{width:100%}
   .lbl{font-size:9px;padding:2px 6px}
-  .lbl.minor{display:none}
   .hint{bottom:auto;top:calc(100% + 8px);background:none}
   .list{padding-top:44px}
   .panel{top:auto;left:0;width:100%;max-height:86vh;border-left:0;border-top:1px solid var(--rule);border-radius:16px 16px 0 0;transform:translateY(102%)}
@@ -113,7 +114,7 @@ footer{max-width:1100px;margin:0 auto;padding:0 22px 40px;color:var(--muted);fon
   <section class="scene" aria-label="Şehir haritası">
     <div class="map" id="map">
       <img src="img/sehir_genel.webp" width="1920" height="1080" alt="Gece, suyun üstünde bir şehir: ortada iki keskin kule arasında Kristal Kule, solda Akademi semti, Topluluk Meydanı ve 2027 arsası, sağda Atölye ve ACM şirketinin kulesi.">
-      <div class="hint" id="hint">Bir yapıya dokunun</div>
+      <div class="hint" id="hint">Bir yapıya dokunun ya da aşağıdan seçin</div>
     </div>
   </section>
 
@@ -140,13 +141,13 @@ var OK = "Tamamlandı", GO = "Devam ediyor", WAIT = "Sırada";
 var Y = {
   kristal:{box:[42.1,18.4,57.8,68.6], label:"Kristal Kule", tag:"Ana yapı", title:"Kristal Kule",
     q:"Görsel CV'm. Dokuz katta deneyimlerim, projelerim ve sertifikalarım; kat kat gezilir.",
-    items:[["MeoT Prep","Ürün sahibi ve geliştirici","ok"],["OptiBean Yönetim Uygulaması","Veritabanı ve raporlar","ok"],["OptiBean","Kurucu · Nisan 2025","ok"],["Balım Dondurma","Operasyon müdürü · 8 yaz sezonu","ok"],["Google sertifikaları","Project Management · AI Essentials","ok"]],
-    links:[["Kuleyi gez","../",1]]},
+    items:[["MeoT Prep","App Store'da yayında · ürün sahibi ve geliştirici","ok"],["OptiBean Yönetim Uygulaması","Veritabanı ve raporlar","ok"],["OptiBean","Kurucu · Nisan 2025","ok"],["Balım Dondurma","Operasyon müdürü · 8 yaz sezonu","ok"],["Google sertifikaları","Project Management · AI Essentials","ok"]],
+    links:[["Kuleyi gez","../",1],["MeoT · App Store","https://apps.apple.com/tr/app/meot-prep/id6824998684",0]]},
   acm_kule:{box:[77.2,29.3,83.4,65.8], label:"ACM şirketi", tag:"Ders projesi", title:"ACM şirketi",
     q:"Bir ders için kurduğum hayali şirket. Katlarında dersin konularını gerçek iş senaryolarıyla anlattım.",
     img:"img/iki_kule.webp", items:[], links:[["Şirketi gez","../acm/",1]]},
   acm_meydan:{box:[70.9,60.4,89.6,69.9], ref:"acm_kule"},
-  akademi_meydan:{box:[27.6,48.4,45.1,53.8], label:"Akademi", tag:"Yeditepe · YBS · 2023–2028", title:"Akademi semti",
+  akademi_meydan:{box:[27.6,48.4,45.1,53.8], lblAt:[36.3,35.6], label:"Akademi", tag:"Yeditepe · YBS · 2023–2028", title:"Akademi semti",
     q:"Bölümümün ders aileleri beş binada. Her ders bir kat: bitenlerin camı yanar, almadıklarım iskelede bekler. Meydandaki şerit sekiz dönemi gösterir; şu an beşincisindeyim.",
     img:"img/akademi.webp",
     items:[["Yazılım","5 ders","ok"],["Veri ve Sistem","2 ders · 1 seçmeli kat iskelede","ok"],["Web ve Dijital İş","3 ders","ok"],["Yönetim ve Kurumsal Sistemler","2 ders · 2 kat iskelede","go"],["İşletme ve İktisat","4 ders","ok"],["MIS394 Staj · MIS498 Bitirme","Meydandaki iki taş","wait"]],
@@ -169,7 +170,7 @@ var Y = {
   topluluk:{box:[12.5,57.6,27.4,68.9], label:"Topluluk Meydanı", tag:"Eyl 2025 – Haz 2026", title:"Topluluk Meydanı",
     q:"Yeditepe etkinlik ofisinde görevliydim: yaklaşık 20 etkinliğin organizasyonu, kayıt ve katılımcı takibi, salon ve malzeme hazırlığı.",
     img:"img/topluluk.webp", img2:"img/topluluk_ic.webp", items:[["Etkinlik ofisi görevlisi","~20 etkinlik","ok"]], links:[]},
-  atolye_avlu:{box:[55.6,48.4,71.6,53.8], label:"Atölye", tag:"Kendi projelerim", title:"Atölye",
+  atolye_avlu:{box:[55.6,48.4,71.6,53.8], lblAt:[62.5,43.2], label:"Atölye", tag:"Kendi projelerim", title:"Atölye",
     q:"Ders dışında kendi başıma yaptıklarım. Her pavyon bir uğraş; iskeleler hâlâ sürdüğünü gösterir. Avluda yeni pavyonlar için boş yer var.",
     img:"img/atolye.webp",
     items:[["Stüdyo","3D ve Blender","go"],["Oyun","Mobil oyun","go"],["Kod","Python","go"],["Fikirler","Video, 3D baskı, karakter, masa oyunu","wait"]], links:[]},
@@ -210,13 +211,17 @@ Object.keys(Y).sort(function(a, b){ return area(Y[b].box) - area(Y[a].box); }).f
   map.appendChild(s); spots[id] = s;
   if (y.label){
     var l = el("span", "lbl" + (y.minor ? " minor" : ""), y.label);
-    l.style.left = (b[0] + b[2]) / 2 + "%"; l.style.top = "calc(" + b[1] + "% - 8px)"; l.style.zIndex = 40;
+    var at = y.lblAt || [(b[0] + b[2]) / 2, b[1]];
+    l.style.left = at[0] + "%"; l.style.top = "calc(" + at[1] + "% - 8px)"; l.style.zIndex = y.minor ? 41 : 40;
     l.setAttribute("aria-hidden", "true"); map.appendChild(l); labels[id] = l;
   }
 });
-function hot(id, on){ if (labels[id]) labels[id].classList.toggle("hot", on); }
+function hot(id, on){
+  if (labels[id]) labels[id].classList.toggle("hot", on);
+}
 
 /* liste */
+if (window.matchMedia && matchMedia("(hover:hover)").matches) document.getElementById("hint").textContent = "Bir yapının üstüne gelin, tıklayınca içi açılır";
 var grid = document.getElementById("grid");
 ORDER.forEach(function(id){
   var d = Y[id], li = el("li"), b = el("button");
@@ -250,6 +255,7 @@ function show(id, from){
   var acts = el("div", "acts");
   (d.links || []).forEach(function(l){
     var a = el("a", "btn" + (l[2] ? " main" : ""), l[0]); a.href = l[1];
+    if (/^https?:/.test(l[1])){ a.target = "_blank"; a.rel = "noopener"; }
     if (/\.pdf$/.test(l[1])) a.setAttribute("download", "");
     acts.appendChild(a);
   });

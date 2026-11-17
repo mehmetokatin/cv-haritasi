@@ -154,6 +154,7 @@ a{color:inherit}
 .sheet{position:fixed;z-index:10;top:0;right:0;bottom:0;width:min(680px,100vw);display:flex;flex-direction:column;background:var(--panel);
   border-left:1px solid var(--rule);transform:translateX(102%);transition:transform .35s ease;visibility:hidden}
 .sheet.on{transform:none;visibility:visible}
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 4px}.shots figure{margin:0}.shots img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--rule)}.shots figcaption{margin-top:5px;font-size:12.5px;line-height:1.3;color:var(--muted)}
 .scrim{position:fixed;z-index:9;inset:0;background:rgba(5,7,11,.6);opacity:0;pointer-events:none;transition:opacity .3s}
 .scrim.on{opacity:1;pointer-events:auto}
 .sheet header{display:flex;align-items:flex-start;gap:12px;padding:20px 22px 16px;border-bottom:1px solid var(--rule)}
@@ -263,7 +264,7 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
   </section>
 
   <section class="card" data-seg="meot" data-name="MeoT Prep">
-    <div class="eyebrow"><span class="no">02</span><span>MeoT katı</span><button type="button" class="tag ok" aria-expanded="false" aria-label="Doğrulanmış: Etiketi açıkla" data-what="Ürün yayında: meot.com.tr" data-how="Bağlantıyı açan herkes ürünü kendisi görür." data-when="16 Kasım 2026">Doğrulanmış</button></div>
+    <div class="eyebrow"><span class="no">02</span><span>MeoT katı</span><button type="button" class="tag ok" aria-expanded="false" aria-label="Doğrulanmış: Etiketi açıkla" data-what="App Store'da yayında (5 Kasım 2026); site: meot.com.tr" data-how="Bağlantıyı açan herkes uygulamayı kendisi indirip görebilir." data-when="16 Kasım 2026">Doğrulanmış</button></div>
     <h2>MeoT Prep</h2>
     <p class="role">Ürün sahibi ve geliştirici · Eyl 2026 – bugün</p>
     <p class="q">Bir öğretmenin saatlerini alan işi, sayıları değişen soru kalıplarına çevirdim.</p>
@@ -271,7 +272,7 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
       <li>Öğretmen–öğrenci akışları, YKS kurallarıyla puanlanan denemeler, hata defteri</li>
       <li>KVKK veli onayı, Row Level Security, 35 otomatik test</li>
     </ul>
-    <div class="acts"><a class="open" href="https://meot.com.tr" target="_blank" rel="noopener">meot.com.tr<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
+    <div class="acts"><a class="open" href="https://apps.apple.com/tr/app/meot-prep/id6824998684" target="_blank" rel="noopener">App Store<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a><a class="open" href="https://meot.com.tr" target="_blank" rel="noopener">meot.com.tr<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a><button class="open quiet" data-case="meot">Nasıl yaptım?</button></div>
   </section>
 
   <section class="card" data-seg="uygulama" data-name="OptiBean Uygulaması">
@@ -283,7 +284,7 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
       <li>Ciro, en çok satan, saatlik yoğunluk ve net kâr raporları</li>
       <li>Kullanılmayan ilk sürümü sadeleştirip yeniden kurdum</li>
     </ul>
-    <div class="acts"><a class="open" href="https://github.com/mehmetokatin/optibean" target="_blank" rel="noopener">GitHub deposu<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
+    <div class="acts"><a class="open" href="https://github.com/mehmetokatin/optibean" target="_blank" rel="noopener">GitHub deposu<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a><button class="open quiet" data-case="uygulama">Nasıl yaptım?</button></div>
   </section>
 
   <section class="card" data-seg="optibean" data-name="OptiBean">
@@ -295,7 +296,7 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
       <li>Telefon, Trendyol ve Instagram satış kanalları</li>
       <li>Düğün ve kurumsal etkinlikler için mobil karavanla B2B hattı</li>
     </ul>
-    <div class="acts"><a class="open" href="https://optibean.com.tr" target="_blank" rel="noopener">optibean.com.tr<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
+    <div class="acts"><a class="open" href="https://optibean.com.tr" target="_blank" rel="noopener">optibean.com.tr<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a><button class="open quiet" data-case="optibean">Nasıl yaptım?</button></div>
   </section>
 
   <section class="card" data-seg="balim" data-name="Balım Dondurma">
@@ -355,7 +356,7 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
     <p class="role">Yaz 2027 · İstanbul ya da uzaktan</p>
     <p class="q">Kulenin en üst katı henüz iskelede. Onu ilk stajım dolduracak.</p>
     <ul class="meta">
-      <li>Getirdiklerim: gerçek bir işletmenin operasyonu, yayında iki ürün, veriyle karar alma</li>
+      <li>Getirdiklerim: gerçek bir işletmenin operasyonu, iki yazılım projesi, veriyle karar alma</li>
       <li>Aradığım: ürün ya da iş analizi yapan, öğrenmeye açık bir ekip</li>
     </ul>
     <div class="acts"><a class="open" href="mailto:mehmetokatinn@gmail.com" data-mail>E-posta gönder</a><a class="open quiet" href="Mehmet_Okatin_CV.pdf" download data-pdf>PDF indir</a></div>
@@ -371,6 +372,11 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
 <div id="track"></div>
 
 <div class="scrim" id="scrim"></div>
+<aside class="sheet case" id="case" role="dialog" aria-modal="true" aria-labelledby="caseTitle"></aside>
+<template id="case-meot"><header><div><small>Nasıl yaptım</small><h3 id="caseTitle">MeoT Prep</h3><p>YKS matematik pratik uygulaması · iOS · ürün sahibi ve geliştirici</p></div><button class="close" id="caseClose" aria-label="Kapat"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button></header><div class="body" tabindex="0"><h4>Sorun</h4><p>Özel matematik dersi veren bir arkadaşım soru yazmak ve sayıları elle denemek için saatler harcıyordu. Aynı soruyu ikinci kez çözen öğrenci yöntemi değil cevabı hatırlıyordu; yanlış yapan öğrenci de nerede hata yaptığını bilmiyordu.</p><h4>Ne yaptım</h4><ul><li>Her soruyu bir kez <b>kalıp</b> olarak yazılacak şekilde tasarladım: sayıların yerinde değişkenler var, uygulama her denemede yeni sayılarla yeni bir soru üretiyor.</li><li>Yanlış şıkları öğrencilerin sık yaptığı hatalardan ürettim. Yanlış cevapta "Nerede hata yaptın?" açıklaması ve adım adım çözüm çıkıyor; kaçırılan soru hata defterinde yeni sayılarla tekrar geliyor.</li><li>Öğretmen için: sorunun fotoğrafından kalıp önerisi (Claude API), ödev ve süreli deneme verme, YKS net kurallarıyla puanlama, konu bazlı analiz.</li><li>Öğrencilerin çoğu 18 yaşından küçük: takma ad, en az veri, veli onayı (KVKK), Row Level Security. Puan ve cevap kontrolü yalnızca sunucuda.</li><li>Önce test ortamı, sonra canlı. Her gönderimde GitHub Actions tip kontrolünü ve 35 otomatik testi çalıştırıyor.</li></ul><h4>Sonuç</h4><ul><li>Apple'ın istediği düzeltmeleri yapıp incelemeden geçtim: <b>5 Kasım 2026'dan beri App Store'da</b> (Türkiye, ücretsiz).</li><li>Sıradaki: 31 Ocak 2027'ye kadar 5 öğretmen ve 50 öğrenciyle pilot.</li></ul><h4>Ekranlar</h4><div class="shots"><figure><img src="v2/kanit/meot_soru.webp" alt="Kalıptan üretilen soru" loading="lazy" width="480" height="1043"><figcaption>Kalıptan üretilen soru</figcaption></figure><figure><img src="v2/kanit/meot_cozum.webp" alt="Hata teşhisi ve çözüm" loading="lazy" width="480" height="1043"><figcaption>Hata teşhisi ve çözüm</figcaption></figure><figure><img src="v2/kanit/meot_sablon.webp" alt="Fotoğraftan kalıp" loading="lazy" width="480" height="1043"><figcaption>Fotoğraftan kalıp</figcaption></figure></div><h4>Teknoloji</h4><p>React Native (Expo), TypeScript, Supabase (PostgreSQL, Edge Functions), Claude API, GitHub Actions</p></div><div class="foot"><a class="open" href="https://apps.apple.com/tr/app/meot-prep/id6824998684" target="_blank" rel="noopener">App Store<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a><a class="open quiet" href="https://meot.com.tr" target="_blank" rel="noopener">meot.com.tr<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div></template>
+<template id="case-uygulama"><header><div><small>Nasıl yaptım</small><h3 id="caseTitle">OptiBean Yönetim Uygulaması</h3><p>Mağazamın satış, stok ve giderleri · iOS · ürün sahibi ve geliştirici</p></div><button class="close" id="caseClose" aria-label="Kapat"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button></header><div class="body" tabindex="0"><h4>Sorun</h4><p>Mağazada gün sonu kâğıda yazılıyordu. Hangi lezzetin ne kadar sattığını, hangi saatlerin yoğun olduğunu ve ay sonunda gerçekten kâr edip etmediğimi göremiyordum.</p><h4>Ne yaptım</h4><ul><li>Satış, stok ve giderleri tek yerde toplayan bir PostgreSQL şeması tasarladım (Supabase, Row Level Security).</li><li>Raporlar: bugün, son 7 ve 30 gün için ciro, satış sayısı ve ortalama sepet; günlük ciro grafiği, en yoğun saatler, en çok satan 10 lezzet, net kâr ve kâr marjı.</li><li>Kutu bazlı stok: dondurma 6 kg'lık kutularda üretiliyor. Lezzet başına kutu takibi, üretim girişi ve kritik seviyenin altına düşen lezzet için ana ekranda uyarı.</li><li>İlk sürüm günlük kullanımdan düşünce Ekim 2026'da yeniden kurdum ve satış girişini sadeleştirdim.</li></ul><h4>Sonuç</h4><ul><li>Menü, fiyat ve üretim kararlarını bu raporlara bakarak veriyorum.</li><li>Kod ve değişiklik geçmişi GitHub'da açık. Sıradaki: Trendyol komisyon hesabı, haftalık üretim önerisi, aylık raporun PDF'i.</li></ul><h4>Ekranlar</h4><div class="shots"><figure><img src="v2/kanit/opt_ana.webp" alt="Yönetim paneli" loading="lazy" width="480" height="1043"><figcaption>Yönetim paneli</figcaption></figure><figure><img src="v2/kanit/opt_satis.webp" alt="Satış ekranı" loading="lazy" width="480" height="1043"><figcaption>Satış ekranı</figcaption></figure><figure><img src="v2/kanit/opt_stok.webp" alt="Kutu bazlı stok" loading="lazy" width="480" height="1043"><figcaption>Kutu bazlı stok</figcaption></figure></div><h4>Teknoloji</h4><p>React Native (Expo), TypeScript, PostgreSQL (Supabase), EAS Update</p></div><div class="foot"><a class="open" href="https://github.com/mehmetokatin/optibean" target="_blank" rel="noopener">GitHub deposu<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div></template>
+<template id="case-optibean"><header><div><small>Nasıl yaptım</small><h3 id="caseTitle">OptiBean</h3><p>Kendi dondurma markam · kurucu ve sahibi · Nisan 2025'ten beri</p></div><button class="close" id="caseClose" aria-label="Kapat"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button></header><div class="body" tabindex="0"><h4>Sorun</h4><p>Kendi ürünlerimi (kahve bazlı lezzetler, "Dadu") satan bir marka kurmak istiyordum; tek bir mağazanın satışı ve sezonluk talep yetmiyordu.</p><h4>Ne yaptım</h4><ul><li>Mağazayı kurdum; telefon, Trendyol ve Instagram satış kanallarını yönetiyorum.</li><li>Günlük operasyonu kendi geliştirdiğim yönetim uygulamasıyla dijitalleştirdim (bir alt kat).</li><li>30'dan fazla lezzet, kategori filtreleri ve etkinlik teklif talebi akışı olan, mobil uyumlu bir site yayınladım.</li><li>Düğün ve kurumsal etkinlikler için mobil dondurma karavanıyla bir B2B hattı hazırlıyorum; sitede şirket logosunun karavan üzerinde önizlemesi var.</li></ul><h4>Sonuç</h4><ul><li>Marka, site ve satış kanalları yayında; B2B hattı hazırlık aşamasında.</li></ul></div><div class="foot"><a class="open" href="https://optibean.com.tr" target="_blank" rel="noopener">optibean.com.tr<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a><a class="open quiet" href="https://github.com/mehmetokatin/optibean-site" target="_blank" rel="noopener">Site kodu<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div></template>
+
 <aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
   <header>
     <div><small>Klasik CV</small><h3 id="sheetTitle">Mehmet Okatın</h3>
@@ -398,7 +404,7 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
     <h4>Projeler</h4>
     <div class="item">
       <div class="top"><p><b>MeoT Prep</b> — Yapay Zekâ Destekli Matematik Pratik Uygulaması · Ürün sahibi ve geliştirici</p><span>Eyl 2026 – Günümüz</span></div>
-      <p class="sub"><a href="https://meot.com.tr" target="_blank" rel="noopener">meot.com.tr</a> · React Native (Expo), TypeScript, Supabase, Claude API · iOS, App Store incelemesinde</p>
+      <p class="sub"><a href="https://meot.com.tr" target="_blank" rel="noopener">meot.com.tr</a> · React Native (Expo), TypeScript, Supabase, Claude API · iOS, <a href="https://apps.apple.com/tr/app/meot-prep/id6824998684" target="_blank" rel="noopener">App Store'da yayında</a></p>
       <ul>
         <li>Özel matematik dersi veren bir arkadaşım soru yazmak ve sayıları elle denemek için saatler harcıyordu. Her soruyu, her denemede sayıları değişen bir kalıp olarak tasarladım; öğrenci cevabı ezberlemek yerine yöntemi öğreniyor.</li>
         <li>Claude API ile bir sorunun fotoğrafını, yanlış şıkları öğrencilerin sık yaptığı hatalardan oluşan bir kalıba dönüştürdüm.</li>
@@ -722,8 +728,17 @@ function openSheet(){
   sheet.classList.add("on"); scrim.classList.add("on"); document.body.classList.add("locked");
   $("sheetClose").focus();
 }
+var caseEl = $("case");
+function openCase(id){                                        /* "Nasil yaptim?" cekmecesi: klasik CV ile ayni kurallar */
+  var t = document.getElementById("case-" + id); if (!t) return;
+  if (sheetOpen) closeSheet();
+  caseEl.innerHTML = t.innerHTML; sheetOpen = true; lastFocus = document.activeElement;
+  caseEl.classList.add("on"); scrim.classList.add("on"); document.body.classList.add("locked");
+  var b = caseEl.querySelector(".body"); if (b) b.scrollTop = 0; $("caseClose").focus();
+}
 function closeSheet(){
   if (!sheetOpen) return; sheetOpen = false;
+  caseEl.classList.remove("on");
   sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("locked");
   if (lastFocus && lastFocus.focus) lastFocus.focus();
 }
@@ -755,10 +770,11 @@ function pdf(e, el){
 if (window.top !== window.self) Array.prototype.forEach.call(document.querySelectorAll("[data-mail]"), function(a){ a.target = "_blank"; a.rel = "noopener"; });
 
 document.addEventListener("click", function(e){
-  var t = e.target.closest ? e.target.closest("[data-pdf],[data-cv],[data-go],#home,#sheetClose,#scrim") : null;
+  var t = e.target.closest ? e.target.closest("[data-pdf],[data-cv],[data-case],[data-go],#home,#sheetClose,#caseClose,#scrim") : null;
   if (!t) return;
   if (t.hasAttribute("data-pdf")) pdf(e, t);
   else if (t.hasAttribute("data-cv")) openSheet();
+  else if (t.dataset.case) openCase(t.dataset.case);
   else if (t.dataset.go) go(t.dataset.go, true);
   else if (t.id === "home") go("giris", true);
   else closeSheet();
@@ -776,7 +792,7 @@ function curIndex(y){
   for (var k = 0; k < SEG.length; k++){ var n = SEG[k + 1]; if (!n || y < n.y0) return k; }
   return SEG.length - 1;
 }
-function inSheet(t){ return sheetOpen || (t && t.closest && t.closest("#sheet")); }
+function inSheet(t){ return sheetOpen || (t && t.closest && t.closest("#sheet,#case")); }
 function glide(s){
   var from = window.scrollY || 0, to = stopY(s);
   if (Math.abs(to - from) < 2){ anim = null; return; }
@@ -847,6 +863,7 @@ window.addEventListener("scroll", function(){
 function route(){
   var h = (location.hash || "").slice(1);
   if (h === "klasik-cv") openSheet();
+  else if (/-nasil$/.test(h) && byId[h.slice(0, -6)]){ go(h.slice(0, -6), false); openCase(h.slice(0, -6)); }
   else if (byId[h]) go(h, false);
 }
 var lastW = 0;

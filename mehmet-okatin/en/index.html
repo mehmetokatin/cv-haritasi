@@ -154,6 +154,7 @@ a{color:inherit}
 .sheet{position:fixed;z-index:10;top:0;right:0;bottom:0;width:min(680px,100vw);display:flex;flex-direction:column;background:var(--panel);
   border-left:1px solid var(--rule);transform:translateX(102%);transition:transform .35s ease;visibility:hidden}
 .sheet.on{transform:none;visibility:visible}
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 4px}.shots figure{margin:0}.shots img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--rule)}.shots figcaption{margin-top:5px;font-size:12.5px;line-height:1.3;color:var(--muted)}
 .scrim{position:fixed;z-index:9;inset:0;background:rgba(5,7,11,.6);opacity:0;pointer-events:none;transition:opacity .3s}
 .scrim.on{opacity:1;pointer-events:auto}
 .sheet header{display:flex;align-items:flex-start;gap:12px;padding:20px 22px 16px;border-bottom:1px solid var(--rule)}
@@ -263,7 +264,7 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
   </section>
 
   <section class="card" data-seg="meot" data-name="MeoT Prep">
-    <div class="eyebrow"><span class="no">02</span><span>MeoT floor</span><button type="button" class="tag ok" aria-expanded="false" aria-label="Verified: Explain this tag" data-what="Live product: meot.com.tr" data-how="Anyone opening the link can see the product." data-when="16 Nov 2026">Verified</button></div>
+    <div class="eyebrow"><span class="no">02</span><span>MeoT floor</span><button type="button" class="tag ok" aria-expanded="false" aria-label="Verified: Explain this tag" data-what="On the App Store since 5 Nov 2026; site: meot.com.tr" data-how="Anyone opening the link can download and see the app." data-when="16 Nov 2026">Verified</button></div>
     <h2>MeoT Prep</h2>
     <p class="role">Product owner &amp; developer · Sep 2026 – present</p>
     <p class="q">I turned work that took a teacher hours into question templates whose numbers change every time.</p>
@@ -271,7 +272,7 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
       <li>Teacher–student flows, timed mock exams scored with YKS rules, a mistake notebook</li>
       <li>Parental consent (KVKK), Row Level Security, 35 automated tests</li>
     </ul>
-    <div class="acts"><a class="open" href="https://meot.com.tr" target="_blank" rel="noopener">meot.com.tr<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
+    <div class="acts"><a class="open" href="https://apps.apple.com/tr/app/meot-prep/id6824998684" target="_blank" rel="noopener">App Store<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a><a class="open" href="https://meot.com.tr" target="_blank" rel="noopener">meot.com.tr<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a><button class="open quiet" data-case="meot">How I did it</button></div>
   </section>
 
   <section class="card" data-seg="uygulama" data-name="OptiBean App">
@@ -283,7 +284,7 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
       <li>Revenue, best-seller, hourly traffic and net profit reports</li>
       <li>Simplified and rebuilt the first version after it fell out of daily use</li>
     </ul>
-    <div class="acts"><a class="open" href="https://github.com/mehmetokatin/optibean" target="_blank" rel="noopener">GitHub repository<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
+    <div class="acts"><a class="open" href="https://github.com/mehmetokatin/optibean" target="_blank" rel="noopener">GitHub repository<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a><button class="open quiet" data-case="uygulama">How I did it</button></div>
   </section>
 
   <section class="card" data-seg="optibean" data-name="OptiBean">
@@ -295,7 +296,7 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
       <li>Phone, Trendyol and Instagram sales channels</li>
       <li>A B2B line with a mobile ice cream truck for weddings and corporate events</li>
     </ul>
-    <div class="acts"><a class="open" href="https://optibean.com.tr" target="_blank" rel="noopener">optibean.com.tr<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
+    <div class="acts"><a class="open" href="https://optibean.com.tr" target="_blank" rel="noopener">optibean.com.tr<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a><button class="open quiet" data-case="optibean">How I did it</button></div>
   </section>
 
   <section class="card" data-seg="balim" data-name="Balım Dondurma">
@@ -355,7 +356,7 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
     <p class="role">Summer 2027 · Istanbul or remote</p>
     <p class="q">The top floor of the tower is still under scaffolding. My first internship will fill it.</p>
     <ul class="meta">
-      <li>What I bring: running a real business, two shipped products, data-driven decisions</li>
+      <li>What I bring: running a real business, two software projects, data-driven decisions</li>
       <li>What I'm looking for: a team doing product or business analysis that likes to teach</li>
     </ul>
     <div class="acts"><a class="open" href="mailto:mehmetokatinn@gmail.com" data-mail>Send an email</a><a class="open quiet" href="Mehmet_Okatin_CV_EN.pdf" download data-pdf>Download PDF</a></div>
@@ -371,6 +372,11 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
 <div id="track"></div>
 
 <div class="scrim" id="scrim"></div>
+<aside class="sheet case" id="case" role="dialog" aria-modal="true" aria-labelledby="caseTitle"></aside>
+<template id="case-meot"><header><div><small>How I did it</small><h3 id="caseTitle">MeoT Prep</h3><p>Math practice app for Turkish university exam (YKS) · iOS · product owner and developer</p></div><button class="close" id="caseClose" aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button></header><div class="body" tabindex="0"><h4>Problem</h4><p>A friend who tutors math spent hours writing questions and trying numbers by hand. A student who solved the same question twice remembered the answer, not the method; a student who got it wrong didn't know where the mistake was.</p><h4>What I did</h4><ul><li>Designed every question to be written once as a <b>template</b>: numbers are variables, and the app generates a fresh question with new numbers on every attempt.</li><li>Generated wrong options from mistakes students commonly make. A wrong answer shows "Where did you go wrong?" and a step-by-step solution; missed questions return in a mistake notebook with new numbers.</li><li>For tutors: template suggestion from a photo of a question (Claude API), homework and timed mock exams, scoring by YKS rules, per-topic analytics.</li><li>Most students are under 18: nicknames, minimal data, parental consent (KVKK, Turkey's GDPR), Row Level Security. Scoring and answer checks run only on the server.</li><li>Test environment first, then production. GitHub Actions runs type checks and 35 automated tests on every push.</li></ul><h4>Result</h4><ul><li>Addressed Apple's review feedback and passed: <b>on the App Store since 5 Nov 2026</b> (Turkey, free).</li><li>Next: a pilot with 5 tutors and 50 students by 31 Jan 2027.</li></ul><h4>Screens</h4><div class="shots"><figure><img src="../v2/kanit/meot_soru.webp" alt="Question from a template" loading="lazy" width="480" height="1043"><figcaption>Question from a template</figcaption></figure><figure><img src="../v2/kanit/meot_cozum.webp" alt="Mistake diagnosis and solution" loading="lazy" width="480" height="1043"><figcaption>Mistake diagnosis and solution</figcaption></figure><figure><img src="../v2/kanit/meot_sablon.webp" alt="Template from a photo" loading="lazy" width="480" height="1043"><figcaption>Template from a photo</figcaption></figure></div><h4>Stack</h4><p>React Native (Expo), TypeScript, Supabase (PostgreSQL, Edge Functions), Claude API, GitHub Actions</p></div><div class="foot"><a class="open" href="https://apps.apple.com/tr/app/meot-prep/id6824998684" target="_blank" rel="noopener">App Store<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a><a class="open quiet" href="https://meot.com.tr" target="_blank" rel="noopener">meot.com.tr<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div></template>
+<template id="case-uygulama"><header><div><small>How I did it</small><h3 id="caseTitle">OptiBean Management App</h3><p>Sales, stock and expenses of my shop · iOS · product owner and developer</p></div><button class="close" id="caseClose" aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button></header><div class="body" tabindex="0"><h4>Problem</h4><p>End-of-day totals were written on paper. I couldn't see which flavor sold how much, which hours were busy, or whether the month actually made a profit.</p><h4>What I did</h4><ul><li>Designed a PostgreSQL schema that keeps sales, stock and expenses in one place (Supabase, Row Level Security).</li><li>Reports: revenue, sales count and average basket for today, 7 and 30 days; daily revenue chart, busiest hours, top 10 flavors, net profit and margin.</li><li>Box-based stock: ice cream is made in 6 kg boxes. Boxes per flavor, production entry, and a home-screen alert when a flavor drops below its critical level.</li><li>When the first version fell out of daily use, I rebuilt it in Oct 2026 and simplified sales entry.</li></ul><h4>Result</h4><ul><li>I make menu, pricing and production decisions from these reports.</li><li>Code and history are public on GitHub. Next: Trendyol commission calculation, weekly production suggestions, monthly report as PDF.</li></ul><h4>Screens</h4><div class="shots"><figure><img src="../v2/kanit/opt_ana.webp" alt="Dashboard" loading="lazy" width="480" height="1043"><figcaption>Dashboard</figcaption></figure><figure><img src="../v2/kanit/opt_satis.webp" alt="Sales screen" loading="lazy" width="480" height="1043"><figcaption>Sales screen</figcaption></figure><figure><img src="../v2/kanit/opt_stok.webp" alt="Box-based stock" loading="lazy" width="480" height="1043"><figcaption>Box-based stock</figcaption></figure></div><h4>Stack</h4><p>React Native (Expo), TypeScript, PostgreSQL (Supabase), EAS Update</p></div><div class="foot"><a class="open" href="https://github.com/mehmetokatin/optibean" target="_blank" rel="noopener">GitHub repository<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div></template>
+<template id="case-optibean"><header><div><small>How I did it</small><h3 id="caseTitle">OptiBean</h3><p>My own ice cream brand · founder and owner · since April 2025</p></div><button class="close" id="caseClose" aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button></header><div class="body" tabindex="0"><h4>Problem</h4><p>I wanted a brand selling my own products (coffee-based flavors, "Dadu"); one shop's sales and seasonal demand weren't enough.</p><h4>What I did</h4><ul><li>Opened the shop; I run phone, Trendyol and Instagram sales channels.</li><li>Digitized daily operations with a management app I built (one floor below).</li><li>Launched a mobile-friendly site with 30+ flavors, category filters and an event quote request flow.</li><li>Preparing a B2B line with a mobile ice cream truck for weddings and corporate events; the site previews a company's logo on the truck.</li></ul><h4>Result</h4><ul><li>Brand, site and sales channels are live; the B2B line is in preparation.</li></ul></div><div class="foot"><a class="open" href="https://optibean.com.tr" target="_blank" rel="noopener">optibean.com.tr<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a><a class="open quiet" href="https://github.com/mehmetokatin/optibean-site" target="_blank" rel="noopener">Site code<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div></template>
+
 <aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
   <header>
     <div><small>Classic CV</small><h3 id="sheetTitle">Mehmet Okatın</h3>
@@ -398,7 +404,7 @@ button.tag:hover,button.tag:focus-visible,button.tag[aria-expanded="true"]{borde
     <h4>Projects</h4>
     <div class="item">
       <div class="top"><p><b>MeoT Prep</b> — AI-Assisted Math Practice App · Product owner &amp; developer</p><span>Sep 2026 – Present</span></div>
-      <p class="sub"><a href="https://meot.com.tr" target="_blank" rel="noopener">meot.com.tr</a> · React Native (Expo), TypeScript, Supabase, Claude API · iOS, in App Store review</p>
+      <p class="sub"><a href="https://meot.com.tr" target="_blank" rel="noopener">meot.com.tr</a> · React Native (Expo), TypeScript, Supabase, Claude API · iOS, <a href="https://apps.apple.com/tr/app/meot-prep/id6824998684" target="_blank" rel="noopener">on the App Store</a></p>
       <ul>
         <li>A friend who tutors math spent hours writing questions and testing numbers by hand. I designed each question as a template whose numbers change on every attempt, so students learn the method instead of memorizing answers.</li>
         <li>Using the Claude API, I turned a photo of a question into a template whose wrong options come from mistakes students commonly make.</li>
@@ -722,8 +728,17 @@ function openSheet(){
   sheet.classList.add("on"); scrim.classList.add("on"); document.body.classList.add("locked");
   $("sheetClose").focus();
 }
+var caseEl = $("case");
+function openCase(id){                                        /* "Nasil yaptim?" cekmecesi: klasik CV ile ayni kurallar */
+  var t = document.getElementById("case-" + id); if (!t) return;
+  if (sheetOpen) closeSheet();
+  caseEl.innerHTML = t.innerHTML; sheetOpen = true; lastFocus = document.activeElement;
+  caseEl.classList.add("on"); scrim.classList.add("on"); document.body.classList.add("locked");
+  var b = caseEl.querySelector(".body"); if (b) b.scrollTop = 0; $("caseClose").focus();
+}
 function closeSheet(){
   if (!sheetOpen) return; sheetOpen = false;
+  caseEl.classList.remove("on");
   sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("locked");
   if (lastFocus && lastFocus.focus) lastFocus.focus();
 }
@@ -755,10 +770,11 @@ function pdf(e, el){
 if (window.top !== window.self) Array.prototype.forEach.call(document.querySelectorAll("[data-mail]"), function(a){ a.target = "_blank"; a.rel = "noopener"; });
 
 document.addEventListener("click", function(e){
-  var t = e.target.closest ? e.target.closest("[data-pdf],[data-cv],[data-go],#home,#sheetClose,#scrim") : null;
+  var t = e.target.closest ? e.target.closest("[data-pdf],[data-cv],[data-case],[data-go],#home,#sheetClose,#caseClose,#scrim") : null;
   if (!t) return;
   if (t.hasAttribute("data-pdf")) pdf(e, t);
   else if (t.hasAttribute("data-cv")) openSheet();
+  else if (t.dataset.case) openCase(t.dataset.case);
   else if (t.dataset.go) go(t.dataset.go, true);
   else if (t.id === "home") go("giris", true);
   else closeSheet();
@@ -776,7 +792,7 @@ function curIndex(y){
   for (var k = 0; k < SEG.length; k++){ var n = SEG[k + 1]; if (!n || y < n.y0) return k; }
   return SEG.length - 1;
 }
-function inSheet(t){ return sheetOpen || (t && t.closest && t.closest("#sheet")); }
+function inSheet(t){ return sheetOpen || (t && t.closest && t.closest("#sheet,#case")); }
 function glide(s){
   var from = window.scrollY || 0, to = stopY(s);
   if (Math.abs(to - from) < 2){ anim = null; return; }
@@ -847,6 +863,7 @@ window.addEventListener("scroll", function(){
 function route(){
   var h = (location.hash || "").slice(1);
   if (h === "klasik-cv") openSheet();
+  else if (/-nasil$/.test(h) && byId[h.slice(0, -6)]){ go(h.slice(0, -6), false); openCase(h.slice(0, -6)); }
   else if (byId[h]) go(h, false);
 }
 var lastW = 0;

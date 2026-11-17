@@ -6,6 +6,7 @@
 <title>Mehmet Okatın – ACM · Şirket</title>
 <meta name="description" content="Mehmet Okatın'ın ACM dersinde öğrendiklerini hayali bir şirketin katlarında senaryolarla uyguladığı uygulama yapısı.">
 <meta name="theme-color" content="#05070b">
+<meta property="og:image" content="https://mehmetokatin.github.io/cv-haritasi/mehmet-okatin/acm/v2/kareler/kat_toplanti.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -136,6 +137,16 @@ footer{padding:28px clamp(22px,6vw,90px) 40px;border-top:1px solid var(--rule);d
 .pop b{display:block;color:var(--amber);font-weight:500;margin-bottom:4px}
 .pop.on{display:block}
 
+/* tur sahnesi: kule sabit, katlar kaydikca kamera yukselir */
+.stage{position:fixed;inset:0;z-index:0;pointer-events:none}
+.stage canvas{display:block;width:100%;height:100%}
+main{position:relative;z-index:1}
+.hero,.wide,footer{background:var(--ink)}
+.room .spacer{position:relative;min-height:100vh}
+.room .panel{background:linear-gradient(90deg,rgba(5,7,11,0),rgba(5,7,11,.82) 9%,rgba(5,7,11,.92))}
+.soonnote{margin:16px 0 0;padding:14px 16px;border:1px dashed var(--rule);background:rgba(13,16,22,.6);color:#c9d0dc;font-size:15px}
+.tag.wait{color:var(--amber);border-color:rgba(255,180,105,.4)}
+
 /* dar ekran */
 @media (max-width:860px){
   html{scroll-snap-type:none}
@@ -144,10 +155,10 @@ footer{padding:28px clamp(22px,6vw,90px) 40px;border-top:1px solid var(--rule);d
   .hero .art{height:56vh}
   .hero .art::after{background:linear-gradient(180deg,rgba(5,7,11,0) 55%,var(--ink) 100%)}
   .hero .copy{padding:0 20px 50px}
-  .room .art{min-height:44vh}
-  .room .art::after{background:linear-gradient(180deg,rgba(5,7,11,0) 60%,var(--ink) 100%)}
+  .room .spacer{min-height:58vh}
   .room .floorno{font-size:64px;left:16px;bottom:8px}
-  .panel{max-height:none;min-height:0;padding:10px 18px 46px}
+  .room .panel{background:linear-gradient(180deg,rgba(5,7,11,0),var(--ink) 40px)}
+  .panel{max-height:none;min-height:0;padding:40px 18px 46px}
   .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
   .tabs button{flex:none}
   .step{overflow:visible}
@@ -161,6 +172,7 @@ footer{padding:28px clamp(22px,6vw,90px) 40px;border-top:1px solid var(--rule);d
   <a class="btn" href="../#yeditepe">← CV'ye dön</a>
 </header>
 <nav class="rail" id="rail" aria-label="Katlar"></nav>
+<div class="stage" aria-hidden="true"><canvas id="cv"></canvas></div>
 <main id="app"><p style="padding:120px 24px;color:#9aa4b5">Yükleniyor…</p></main>
 <div class="pop" id="pop" role="tooltip"></div>
 <noscript><p style="padding:24px">Bu sayfa JavaScript ister.</p></noscript>
@@ -203,32 +215,38 @@ function render(){
     '<div class="badge">' + esc(y.ders.ad) + ' · <b>' + esc(y.tip.ad) + '</b></div>' +
     '<h1>' + esc(y.baslik) + '<small>' + esc(name) + ' · ' + esc(y.tip.ad) + '</small></h1>' +
     '<p class="lead">' + esc(y.aciklama) + '</p>' +
-    '<ul class="facts"><li><b>' + open + '</b><span>açık kat</span></li><li><b>' + y.yakinda.length + '</b><span>yakında</span></li><li><b>' + glKeys.length + '</b><span>kavram</span></li></ul>' +
+    '<ul class="facts"><li><b>' + open + '</b><span>senaryolu kat</span></li><li><b>' + y.yakinda.length + '</b><span>yakında</span></li><li><b>' + glKeys.length + '</b><span>kavram</span></li></ul>' +
     '<p class="note"><span class="tag' + (y.dogrulama.durum === "dogrulanmis" ? " ok" : "") + '">' + (y.dogrulama.durum === "dogrulanmis" ? "Doğrulanmış" : "Beyan") + '</span> ' + esc(y.dogrulama.not) + ' ' + esc(y.ders.not) + '</p>' +
-    '<div class="hint"><i></i>Kaydırarak katlara gir</div></div></section>';
+    '<div class="hint"><i></i>Kaydırın: kat kat gezin</div></div></section>';
 
-  y.odalar.forEach(function(r, i){
-    h += '<section class="room" id="' + esc(r.id) + '" data-i="' + i + '"><div class="art" style="background-image:url(\'' + esc(r.kare) + '\')"><span class="floorno">' + pad(i + 1) + '</span></div>' +
-      '<div class="panel"><div class="eyebrow"><span class="no">' + pad(i + 1) + '/' + pad(open) + '</span><span>' + esc(r.birim) + '</span><span>' + esc(r.bolum) + '</span>' +
-      '<span class="tag' + (r.tur === "gercek" ? " ok" : "") + '" title="' + (r.tur === "gercek" ? "Kendi işimde yaşadığım gerçek durum" : "Gerçek işimden yola çıkan senaryo") + '">' + (r.tur === "gercek" ? "Gerçek" : "Senaryo") + '</span></div>' +
-      '<h2>' + esc(r.ad) + '</h2><p class="q">' + esc(r.soru) + '</p>' +
-      '<div class="who"><span><b>Rolüm:</b> ' + esc(r.rol) + '</span><span><b>Karşımdaki:</b> ' + esc(r.karsi) + '</span></div>' +
-      '<div class="tabs" role="tablist">' + r.adimlar.map(function(s, j){ return '<button role="tab" data-r="' + i + '" data-s="' + j + '" aria-selected="' + (j === 0) + '">' + esc(s.etiket) + '</button>'; }).join("") + '</div>' +
-      '<div class="step" id="step' + i + '" role="tabpanel"></div>' +
-      '<div class="nav"><button class="btn" data-prev="' + i + '">← Önceki</button><span class="count" id="cnt' + i + '"></span><button class="btn" data-next="' + i + '">Sonraki →</button></div>' +
-      '<div class="chips">' + r.kavramlar.map(function(c){ return '<button data-term="' + esc(c) + '">' + esc(c) + '</button>'; }).join("") + '</div>' +
-      '</div></section>';
+  FLOORS.forEach(function(f, k){
+    var r = f.oda, i = f.i, no = pad(k + 1) + "/" + pad(FLOORS.length);
+    h += '<section class="room" id="' + esc(f.id) + '" data-k="' + k + '"><div class="spacer"><span class="floorno">' + pad(k + 1) + '</span></div><div class="panel">';
+    if (r){
+      h += '<div class="eyebrow"><span class="no">' + no + '</span><span>' + esc(r.birim) + '</span><span>' + esc(r.bolum) + '</span>' +
+        '<span class="tag' + (r.tur === "gercek" ? " ok" : "") + '" title="' + (r.tur === "gercek" ? "Kendi işimde yaşadığım gerçek durum" : "Gerçek işimden yola çıkan senaryo") + '">' + (r.tur === "gercek" ? "Gerçek" : "Senaryo") + '</span></div>' +
+        '<h2>' + esc(r.ad) + '</h2><p class="q">' + esc(r.soru) + '</p>' +
+        '<div class="who"><span><b>Rolüm:</b> ' + esc(r.rol) + '</span><span><b>Karşımdaki:</b> ' + esc(r.karsi) + '</span></div>' +
+        '<div class="tabs" role="tablist">' + r.adimlar.map(function(st, j){ return '<button role="tab" data-r="' + i + '" data-s="' + j + '" aria-selected="' + (j === 0) + '">' + esc(st.etiket) + '</button>'; }).join("") + '</div>' +
+        '<div class="step" id="step' + i + '" role="tabpanel"></div>' +
+        '<div class="nav"><button class="btn" data-prev="' + i + '">← Önceki</button><span class="count" id="cnt' + i + '"></span><button class="btn" data-next="' + i + '">Sonraki →</button></div>' +
+        '<div class="chips">' + r.kavramlar.map(function(c){ return '<button data-term="' + esc(c) + '">' + esc(c) + '</button>'; }).join("") + '</div>';
+    } else {
+      var w = f.yak || {ad:f.id, birim:"", soru:""};
+      h += '<div class="eyebrow"><span class="no">' + no + '</span><span>' + esc(w.birim) + '</span><span class="tag wait">Yakında</span></div>' +
+        '<h2>' + esc(w.ad) + '</h2><p class="q">“' + esc(w.soru) + '”</p>' +
+        '<p class="soonnote">Kat tasarlandı; senaryosu yazılıyor. Dersin başka bir konusunu bu departmanın sorunuyla birleştirecek.</p>';
+    }
+    h += '</div></section>';
   });
 
-  h += '<section class="wide" id="yakinda"><h2>Yakında açılacak katlar</h2><p class="sub">Her biri dersin başka bir konusunu bir departmanın sorunuyla birleştirecek.</p><div class="soon">' +
-    y.yakinda.map(function(r){ return '<div><small>' + esc(r.birim) + '</small><b>' + esc(r.ad) + '</b><p>“' + esc(r.soru) + '”</p></div>'; }).join("") + '</div></section>';
   h += '<section class="wide" id="sozluk"><h2>Kavram sözlüğü</h2><p class="sub">Katlarda geçen ' + glKeys.length + ' kavram, kendi cümlelerimle.</p><div class="gloss">' +
     glKeys.map(function(k){ return '<div><b>' + esc(k) + '</b><span>' + esc(GL[k]) + '</span></div>'; }).join("") + '</div></section>';
   h += '<footer><span>' + esc(y.sahip.ad) + ' · ' + esc(name) + ' · ' + esc(y.tip.ad) + '</span><span>Tasarım ve içerik: ' + esc(y.sahip.ad) + ' · Claude ile geliştirildi</span></footer>';
   $("app").innerHTML = h;
 
   var rail = $("rail");
-  rail.innerHTML = y.odalar.map(function(r, i){ return '<button data-goto="' + esc(r.id) + '"><em>' + esc(r.ad) + '</em>' + pad(i + 1) + '<i></i></button>'; }).join("");
+  rail.innerHTML = FLOORS.map(function(f, k){ return '<button data-goto="' + esc(f.id) + '"><em>' + esc(f.oda ? f.oda.ad : (f.yak ? f.yak.ad : f.id)) + '</em>' + pad(k + 1) + '<i></i></button>'; }).join("");
   y.odalar.forEach(function(r, i){ show(i, 0); });
   watch();
 }
@@ -244,17 +262,98 @@ function show(i, j){
   Array.prototype.forEach.call(document.querySelectorAll('.tabs button[data-r="' + i + '"]'), function(b){ b.setAttribute("aria-selected", String(+b.dataset.s === j)); });
 }
 
+/* ---------- tur motoru ----------
+   Kareler blender/acm_tur.py ile alindi. Goz hizasi kareleri GOZ; o karelerde tur kamerasi kat kamerasiyla ayni yerde,
+   lens ORAN kadar kisa: net kat karesi tur karesine hesapla oturur (olcumle dogrulandi: sapma 0 px). */
+var ORDER = ["vitrin", "satis", "resepsiyon", "depo", "uretim", "yazilim", "muhasebe", "toplanti", "mudur"];
+var GOZ = [1, 28, 55, 82, 109, 136, 163, 190, 216], FRAMES = 216, SC = 0.34875, SX = 205.2, SY = 351.675;
+var FLOORS = [], secs = [], imgs = {}, stills = {}, cv, ctx, dpr = 1, dirty = true, lastKey = "", curK = -1;
+function buildFloors(){
+  FLOORS = ORDER.map(function(id){
+    var i = -1; D.odalar.forEach(function(o, j){ if (o.id === id) i = j; });
+    var yak = null; (D.yakinda || []).forEach(function(o){ if (o.id === id) yak = o; });
+    return {id:id, i:i, oda:i >= 0 ? D.odalar[i] : null, yak:yak};
+  });
+}
+function load(n){
+  if (imgs[n] || n < 1 || n > FRAMES) return;
+  var im = new Image(); imgs[n] = im; im.decoding = "async";
+  im.onload = function(){ im.ok = true; dirty = true; }; im.src = "v2/tur/t_" + ("000" + n).slice(-4) + ".webp";
+}
+function loadStill(id){
+  if (stills[id]) return; var im = new Image(); stills[id] = im;
+  im.onload = function(){ im.ok = true; dirty = true; }; im.src = "v2/kareler/kat_" + id + ".webp";
+}
+function queue(){
+  var all = GOZ.slice(), n;
+  for (n = 1; n <= FRAMES; n += 3) all.push(n);
+  for (n = 1; n <= FRAMES; n++) all.push(n);
+  var i = 0, st = 0;
+  (function step(){
+    var c = 0; while (i < all.length && c < 6){ if (!imgs[all[i]]){ load(all[i]); c++; } i++; }
+    if (st < ORDER.length && i > 9) loadStill(ORDER[st++]);
+    if (i < all.length || st < ORDER.length) setTimeout(step, 110);
+  })();
+}
+function nearest(f){
+  var n = Math.round(f), d;
+  for (d = 0; d < FRAMES; d++){ if (imgs[n - d] && imgs[n - d].ok) return n - d; if (imgs[n + d] && imgs[n + d].ok) return n + d; }
+  return 0;
+}
+function size(){
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  cv.width = Math.round(innerWidth * dpr); cv.height = Math.round(innerHeight * dpr);
+  secs = Array.prototype.map.call(document.querySelectorAll(".room"), function(el){ return el; });
+  dirty = true;
+}
+function narrow(){ return innerWidth <= 860; }
+function geom(){                                   /* karenin olcegi ve yeri: masaustunde kule sol sutunda, telefonda ustte */
+  var cw = cv.width, ch = cv.height, s, x, y;
+  if (narrow()){ s = Math.max(cw, ch * 0.62) / 1080 * 1.05; x = (cw - 1080 * s) / 2; y = ch * 0.29 - 540 * s; }
+  else {
+    s = Math.max(cw / 1080, ch / 1080);
+    var col = cw * 1.15 / 2.15 / 2;
+    x = Math.min(0, Math.max(cw - 1080 * s, col - 540 * s)); y = (ch - 1080 * s) / 2;
+  }
+  return {s:s, x:x, y:y};
+}
+function state(){                                   /* kaydirma -> kare: her katin tepesi ekranin tepesindeyken goz hizasi */
+  var y = window.scrollY || 0, k, t;
+  if (!secs.length) return null;
+  var tops = secs.map(function(el){ return el.offsetTop; });
+  if (y <= tops[0]) return {f:1, k:0, a:Math.max(0, 1 - (tops[0] - y) / (innerHeight * .5)), off:tops[0] - y};
+  for (k = 0; k < tops.length - 1; k++){
+    if (y < tops[k + 1]){ t = (y - tops[k]) / (tops[k + 1] - tops[k]);
+      var hold = narrow() ? Math.min(.5, Math.max(0, (secs[k].offsetHeight - innerHeight) / (tops[k + 1] - tops[k]))) : 0;
+      var u = t <= hold ? 0 : (t - hold) / (1 - hold); u = u * u * (3 - 2 * u);
+      return {f:GOZ[k] + (GOZ[k + 1] - GOZ[k]) * u, k:u < .5 ? k : k + 1, sa:u < .08 ? 1 - u / .08 : u > .92 ? (u - .92) / .08 : 0, sk:u < .5 ? k : k + 1, a:1}; }
+  }
+  return {f:FRAMES, k:tops.length - 1, sa:1, sk:tops.length - 1, a:1};
+}
+function draw(){
+  var st = state();
+  if (st){
+    var key = st.f.toFixed(2) + (st.sa || 0).toFixed(2) + st.a.toFixed(2) + cv.width;
+    if (key !== lastKey || dirty){
+      var g = geom(), a = Math.floor(st.f), fr = st.f - a, n0 = nearest(a), n1 = fr > .02 ? nearest(a + 1) : 0, w = 1080 * g.s;
+      ctx.globalAlpha = 1; ctx.fillStyle = "#05070b"; ctx.fillRect(0, 0, cv.width, cv.height);
+      if (n0){
+        ctx.globalAlpha = st.a; ctx.drawImage(imgs[n0], g.x, g.y, w, w);
+        if (n1 && n1 !== n0){ ctx.globalAlpha = st.a * fr; ctx.drawImage(imgs[n1], g.x, g.y, w, w); }
+        var sk = st.sk === undefined ? 0 : st.sk, im = stills[ORDER[sk]], sa = st.sk === undefined ? st.a : st.sa;
+        if (im && im.ok && sa > .01){ ctx.globalAlpha = sa * st.a; ctx.drawImage(im, g.x + SX * g.s, g.y + SY * g.s, 1920 * SC * g.s, 1080 * SC * g.s); }
+      }
+      ctx.globalAlpha = 1; lastKey = key; dirty = false;
+    }
+    if (st.k !== curK){ curK = st.k; Array.prototype.forEach.call($("rail").children, function(b, i){ b.setAttribute("aria-current", String(i === curK)); }); }
+  }
+  requestAnimationFrame(draw);
+}
 function watch(){
-  var rooms = document.querySelectorAll(".room"), btns = $("rail").children;
-  if (!("IntersectionObserver" in window)) return;
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if (!e.isIntersecting) return;
-      var i = +e.target.dataset.i;
-      Array.prototype.forEach.call(btns, function(b, k){ b.setAttribute("aria-current", String(k === i)); });
-    });
-  }, {threshold:.55});
-  Array.prototype.forEach.call(rooms, function(r){ io.observe(r); });
+  cv = $("cv"); ctx = cv.getContext("2d");
+  size(); queue(); requestAnimationFrame(draw);
+  window.addEventListener("resize", size);
+  if (location.hash){ var el = document.getElementById(location.hash.slice(1)); if (el) el.scrollIntoView(); }
 }
 
 /* kavram balonu */
@@ -284,7 +383,7 @@ window.addEventListener("scroll", hidePop, {passive:true});
 
 fetch("yapi.json").then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); }).then(function(d){
   D = d; GL = d.sozluk || {}; glKeys = Object.keys(GL);
-  render();
+  buildFloors(); render();
 }).catch(function(){
   $("app").innerHTML = '<p style="padding:120px 24px;color:#9aa4b5">İçerik yüklenemedi. <a href="../">CV\'ye dön</a></p>';
 });
